@@ -1,0 +1,16 @@
+2026-02-17T07:04:41.296385Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2026-02-17T07:04:41.468880Z 0 [System] [MY-010116] [Server] /usr/local/mysql-9.4.0-macos15-arm64/bin/mysqld (mysqld 9.4.0) starting as process 29005
+2026-02-17T07:04:41.468895Z 0 [System] [MY-015590] [Server] MySQL Server has access to 8 logical CPUs.
+2026-02-17T07:04:41.468905Z 0 [System] [MY-015590] [Server] MySQL Server has access to 8589934592 bytes of physical memory.
+2026-02-17T07:04:41.478776Z 0 [Warning] [MY-010159] [Server] Setting lower_case_table_names=2 because file system for /Users/mountain/Desktop/ICT/Year2/Semester 2/WebDev/Project/server/mysql_data/ is case insensitive
+2026-02-17T07:04:41.486124Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2026-02-17T07:04:41.559664Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2026-02-17T07:04:42.666751Z 0 [ERROR] [MY-011292] [Server] Plugin mysqlx reported: 'Preparation of I/O interfaces failed, X Protocol won't be accessible'
+2026-02-17T07:04:42.666887Z 0 [ERROR] [MY-011300] [Server] Plugin mysqlx reported: 'Setup of bind-address: '*' port: 33060 failed, `bind()` failed with error: Address already in use (48). Do you already have another mysqld server running with Mysqlx ?'
+2026-02-17T07:04:42.666907Z 0 [ERROR] [MY-013597] [Server] Plugin mysqlx reported: 'Value '*' set to `Mysqlx_bind_address`, X Plugin can't bind to it. Skipping this value.'
+2026-02-17T07:04:42.666938Z 0 [ERROR] [MY-011300] [Server] Plugin mysqlx reported: 'Setup of socket: '/tmp/mysqlx.sock' failed, `bind()` on UNIX socket failed with error: Address already in use (48).  Do you already have another mysqld server running with Mysqlx ?'
+2026-02-17T07:04:42.808802Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2026-02-17T07:04:42.808857Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2026-02-17T07:04:42.829151Z 0 [System] [MY-010931] [Server] /usr/local/mysql-9.4.0-macos15-arm64/bin/mysqld: ready for connections. Version: '9.4.0'  socket: '/tmp/mysql_gamestore.sock'  port: 3307  MySQL Community Server - GPL.
+2026-02-18T09:19:46.166481Z 0 [ERROR] [MY-010187] [Server] Could not open file '/Users/mountain/Desktop/ICT/Year2/Semester 2/WebDev/Project/server/mysql_data/error.log' for error logging: No such file or directory
+2026-02-18T09:19:46.168925Z 0 [ERROR] [MY-013129] [Server] A message intended for a client cannot be sent there as no client-session is attached. Therefore, we're sending the information to the error-log instead: MY-004004 - Could not open file '/Users/mountain/Desktop/ICT/Year2/Semester 2/WebDev/Project/server/mysql_data/error.log' for error logging.
