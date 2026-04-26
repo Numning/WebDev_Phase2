@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavSearch();
 });
 
+/**
+ * Sets up tab switching between Sign In and Create Account forms.
+ * Handles active state toggling for both tab headers and content panels.
+ */
 function setupTabs() {
     const tabs = document.querySelectorAll('.auth-tab');
     const contents = document.querySelectorAll('.auth-tab-content');
@@ -36,6 +40,10 @@ function setupTabs() {
     });
 }
 
+/**
+ * Sets up the user login form submission handler.
+ * Sends credentials to the backend and stores session on success.
+ */
 function setupLoginForm() {
     const form = document.getElementById('user-login-form');
     const errorMsg = document.getElementById('login-error');
@@ -81,6 +89,10 @@ function setupLoginForm() {
     });
 }
 
+/**
+ * Sets up the user registration form submission handler.
+ * Sends new user data to the backend and shows success/error feedback.
+ */
 function setupRegisterForm() {
     const form = document.getElementById('user-register-form');
     const errorMsg = document.getElementById('register-error');
@@ -131,6 +143,10 @@ function setupRegisterForm() {
     });
 }
 
+/**
+ * Sets up the navigation bar search input.
+ * Pressing Enter redirects to the search page with the query.
+ */
 function setupNavSearch() {
     const input = document.getElementById('nav-search-input');
     if (input) {

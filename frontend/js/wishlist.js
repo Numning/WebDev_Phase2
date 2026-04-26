@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     loadWishlist();
 });
 
+/**
+ * Loads all wishlisted games from the backend API and renders the wishlist grid.
+ * Displays pricing info and action buttons for each wishlisted game.
+ */
 async function loadWishlist() {
     const container = document.getElementById('wishlist-grid');
     const sessionId = localStorage.getItem('sessionId');
@@ -70,6 +74,10 @@ async function loadWishlist() {
     }
 }
 
+/**
+ * Removes a game from the wishlist via the backend API.
+ * @param {number} gameId - The ID of the game to remove
+ */
 async function removeWishlist(gameId) {
     const sessionId = localStorage.getItem('sessionId');
     try {
@@ -80,6 +88,10 @@ async function removeWishlist(gameId) {
     }
 }
 
+/**
+ * Adds a game to the shopping cart via the backend API.
+ * @param {number} gameId - The ID of the game to add
+ */
 async function addToCart(gameId) {
     const sessionId = localStorage.getItem('sessionId');
     try {
@@ -97,6 +109,10 @@ async function addToCart(gameId) {
     }
 }
 
+/**
+ * Updates the cart badge count in the navigation bar.
+ * Fetches the current cart item count from the backend.
+ */
 async function updateCartBadge() {
     const sessionId = localStorage.getItem('sessionId');
     if (!sessionId) return;
@@ -111,6 +127,10 @@ async function updateCartBadge() {
     } catch(e) {}
 }
 
+/**
+ * Sets up the navigation bar search input.
+ * Pressing Enter redirects to the search page with the query.
+ */
 function setupNavSearch() {
     const input = document.getElementById('nav-search-input');
     if (input) {

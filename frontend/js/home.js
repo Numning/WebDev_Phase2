@@ -435,6 +435,10 @@ function escapeHtml(str) {
     return div.innerHTML;
 }
 
+/**
+ * Adds a game to the shopping cart via the backend API.
+ * @param {number} gameId - The ID of the game to add
+ */
 async function addToCart(gameId) {
     const sessionId = localStorage.getItem('sessionId');
     try {
@@ -452,6 +456,10 @@ async function addToCart(gameId) {
     }
 }
 
+/**
+ * Updates the cart badge count in the navigation bar.
+ * Fetches the current cart item count from the backend.
+ */
 async function updateCartBadge() {
     const sessionId = localStorage.getItem('sessionId');
     if (!sessionId) return;

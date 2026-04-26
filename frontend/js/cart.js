@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/**
+ * Loads all cart items from the backend API and renders the cart page.
+ * Calculates subtotal, discounts, and total price.
+ */
 async function loadCartItems() {
     const container = document.getElementById('cart-items');
     const sessionId = localStorage.getItem('sessionId');
@@ -102,6 +106,11 @@ async function loadCartItems() {
     }
 }
 
+/**
+ * Updates the quantity of a cart item via the backend API.
+ * @param {number} cartId - The cart item ID
+ * @param {number} qty - The new quantity value
+ */
 async function updateQuantity(cartId, qty) {
     if (qty < 1) return;
     try {
@@ -117,6 +126,10 @@ async function updateQuantity(cartId, qty) {
     }
 }
 
+/**
+ * Removes a single item from the cart via the backend API.
+ * @param {number} cartId - The cart item ID to remove
+ */
 async function removeFromCart(cartId) {
     try {
         await fetch(`${API_BASE}/cart/${cartId}`, { method: 'DELETE' });
@@ -127,6 +140,10 @@ async function removeFromCart(cartId) {
     }
 }
 
+/**
+ * Updates the cart badge count in the navigation bar.
+ * Fetches the current cart item count from the backend.
+ */
 async function updateCartBadge() {
     const sessionId = localStorage.getItem('sessionId');
     if (!sessionId) return;
@@ -141,6 +158,10 @@ async function updateCartBadge() {
     } catch(e) {}
 }
 
+/**
+ * Sets up the navigation bar search input.
+ * Pressing Enter redirects to the search page with the query.
+ */
 function setupNavSearch() {
     const input = document.getElementById('nav-search-input');
     if (input) {
