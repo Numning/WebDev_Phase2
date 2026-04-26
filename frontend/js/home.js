@@ -8,7 +8,7 @@
  * 4. Free Games horizontal slider
  * 5. Most Popular games slider
  * 
- * Also integrates the CheapShark public API to show real game deals.
+ * Also integrates the GNews public API to show real gaming news headlines.
  */
 
 // Base URL for the backend API server (runs on separate port)
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchGames();
     setupNavSearch();
     updateCartBadge();
-    loadPublicDeals(); // Public API integration (CheapShark)
+    loadGamingNews(); // Public API integration (GNews)
 });
 
 /**
@@ -115,7 +115,7 @@ function renderFeatured(game) {
             <h2 class="featured-title">${game.Title}</h2>
             <p class="featured-desc">${game.Description ? game.Description.substring(0, 160) + '...' : 'Experience the future of gaming.'}</p>
             <div class="featured-actions">
-                <a href="detail.html?id=${game.GameID}" class="btn btn-white">BUY NOW — ${priceDisplay}</a>
+                <a href="/game?id=${game.GameID}" class="btn btn-white">BUY NOW — ${priceDisplay}</a>
                 <button class="btn btn-secondary">+ to Wishlist</button>
             </div>
         </div>
@@ -123,7 +123,7 @@ function renderFeatured(game) {
     // Click on banner goes to game detail page
     banner.onclick = (e) => {
         if (!e.target.closest('.btn')) {
-            window.location.href = `detail.html?id=${game.GameID}`;
+            window.location.href = `/game?id=${game.GameID}`;
         }
     };
 }
@@ -149,7 +149,7 @@ function renderNewReleases(games, trackId) {
         }
 
         return `
-        <a href="detail.html?id=${game.GameID}" class="new-release-card">
+        <a href="/game?id=${game.GameID}" class="new-release-card">
             <img src="${thumb}" alt="${game.Title}" class="bg-img"
                  onerror="this.src='https://images.unsplash.com/photo-1552820728-8b83bb6b2b28?w=400&h=250&fit=crop'">
             <div class="overlay">
@@ -192,7 +192,7 @@ function renderFreeGames(games, trackId) {
         }
 
         return `
-        <a href="detail.html?id=${game.GameID}" class="carousel-card">
+        <a href="/game?id=${game.GameID}" class="carousel-card">
             <img src="${thumb}" alt="${game.Title}"
                  onerror="this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300&h=200&fit=crop'">
             <div class="card-body">
@@ -225,7 +225,7 @@ function renderCarousel(games, trackId) {
         if (disc === 100) salePrice = "0.00";
 
         return `
-        <a href="detail.html?id=${game.GameID}" class="carousel-card">
+        <a href="/game?id=${game.GameID}" class="carousel-card">
             <img src="${thumb}" alt="${game.Title}"
                  onerror="this.src='https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=200&fit=crop'">
             <div class="card-body">
@@ -259,7 +259,7 @@ function renderMostPopular(games) {
         }
 
         return `
-        <a href="detail.html?id=${game.GameID}" style="min-width: 300px; text-decoration: none; color: inherit; flex-shrink: 0;">
+        <a href="/game?id=${game.GameID}" style="min-width: 300px; text-decoration: none; color: inherit; flex-shrink: 0;">
             <div class="popular-card" style="margin-bottom: 8px;">
                 <div class="popular-rank">0${i + 1}</div>
                 <img src="${thumb}" alt="${game.Title}" class="popular-thumb"
@@ -319,62 +319,120 @@ function setupNavSearch() {
     if (input) {
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
-                window.location.href = `search.html?title=${encodeURIComponent(input.value.trim())}`;
+                window.location.href = `/games?title=${encodeURIComponent(input.value.trim())}`;
             }
         });
     }
 }
 
 /**
- * Loads real game deals from the CheapShark public API.
- * This fulfills the Task 4 requirement for public web service integration.
- * CheapShark is a free API that provides game deal data from multiple stores.
- * Displays deals in a dedicated section on the homepage.
+ * Loads latest free-to-play game releases from the backend proxy (/api/news).
+ * This fulfills the requirement for public web service integration.
+ * The backend proxies the FreeToGame API (no API key needed),
+ * so the frontend loads gaming content automatically with no configuration.
  */
-async function loadPublicDeals() {
-    const section = document.getElementById('public-deals-section');
-    const track = document.getElementById('deals-track');
-    if (!section || !track) return;
+async function loadGamingNews() {
+    const section = document.getElementById('gaming-news-section');
+    const grid = document.getElementById('news-grid');
+    if (!section || !grid) return;
 
     try {
-        // CheapShark API — fetch top 10 deals sorted by deal rating
-        const res = await fetch('https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=50&pageSize=10&sortBy=Deal%20Rating');
-        const deals = await res.json();
+        // Fetch latest game releases from the backend proxy (FreeToGame API)
+        const res = await fetch(`${API_BASE}/news`);
+        const data = await res.json();
 
-        if (!deals || deals.length === 0) {
+        // Handle errors from the backend
+        if (!res.ok || !data.articles || data.articles.length === 0) {
             section.style.display = 'none';
+            if (data.error) console.warn('News API:', data.message || data.error);
             return;
         }
 
-        // Render deal cards from the public API data
-        track.innerHTML = deals.map(deal => {
-            const savings = Math.round(parseFloat(deal.savings));
-            const salePrice = parseFloat(deal.salePrice).toFixed(2);
-            const normalPrice = parseFloat(deal.normalPrice).toFixed(2);
-            const thumb = deal.thumb || 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=200&fit=crop';
+        const articles = data.articles;
 
-            return `
-            <a href="https://www.cheapshark.com/redirect?dealID=${deal.dealID}" target="_blank" rel="noopener" class="carousel-card">
-                <img src="${thumb}" alt="${deal.title}"
-                     onerror="this.src='https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=200&fit=crop'">
-                <div class="card-body">
-                    <div class="card-title">${deal.title}</div>
-                    <div class="card-genre">Steam Deal</div>
-                    <div class="card-price">
-                        ${savings > 0 ? `<span class="sale-badge">-${savings}%</span>` : ''}
-                        <span class="original-price">$${normalPrice}</span> $${salePrice}
+        // Render the game release cards — first is featured (larger)
+        grid.innerHTML = articles.map((article, index) => {
+            const img = article.image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop';
+            const publisher = article.source?.name || 'Unknown';
+            const releaseDate = formatReleaseDate(article.publishedAt);
+            const description = article.description
+                ? article.description.substring(0, 120) + (article.description.length > 120 ? '...' : '')
+                : '';
+            const genre = article.genre || '';
+            const platform = article.platform || '';
+
+            // First card is the featured (large) card
+            if (index === 0) {
+                return `
+                <a href="${article.url}" target="_blank" rel="noopener" class="news-card news-card-featured" id="news-card-featured">
+                    <div class="news-card-image">
+                        <img src="${img}" alt="${escapeHtml(article.title)}"
+                             onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop'">
+                        <div class="news-card-image-overlay"></div>
                     </div>
+                    <div class="news-card-content">
+                        <div class="news-card-meta">
+                            <span class="news-source">${escapeHtml(genre)}</span>
+                            <span class="news-platform">${escapeHtml(platform)}</span>
+                        </div>
+                        <h3 class="news-card-title">${escapeHtml(article.title)}</h3>
+                        <p class="news-card-desc">${escapeHtml(description)}</p>
+                        <div class="news-card-footer">
+                            <span class="news-publisher">${escapeHtml(publisher)}</span>
+                            <span class="news-time">${releaseDate}</span>
+                        </div>
+                    </div>
+                </a>`;
+            }
+
+            // Regular smaller cards
+            return `
+            <a href="${article.url}" target="_blank" rel="noopener" class="news-card" id="news-card-${index}">
+                <div class="news-card-image">
+                    <img src="${img}" alt="${escapeHtml(article.title)}"
+                         onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&h=400&fit=crop'">
+                    <div class="news-card-image-overlay"></div>
+                </div>
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <span class="news-source">${escapeHtml(genre)}</span>
+                        <span class="news-time">${releaseDate}</span>
+                    </div>
+                    <h3 class="news-card-title">${escapeHtml(article.title)}</h3>
                 </div>
             </a>`;
         }).join('');
 
         section.style.display = '';
-        setupSlider('deals-prev', 'deals-next', 'deals-track', 300);
     } catch (err) {
-        console.error('Failed to load CheapShark deals:', err);
+        console.error('Failed to load gaming news:', err);
         if (section) section.style.display = 'none';
-        
     }
+}
+
+/**
+ * Formats a release date string into a readable format.
+ * Handles both ISO dates and simple date strings (e.g. "2024-01-15").
+ * @param {string} dateStr - Date string from the API
+ * @returns {string} e.g., "Jan 15, 2024"
+ */
+function formatReleaseDate(dateStr) {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+/**
+ * Escapes HTML entities to prevent XSS when inserting API data into the DOM.
+ * @param {string} str - The raw string from the API
+ * @returns {string} Escaped HTML-safe string
+ */
+function escapeHtml(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
 }
 
 async function addToCart(gameId) {

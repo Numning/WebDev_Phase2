@@ -11,7 +11,7 @@ const API_BASE = 'http://localhost:3000/api';
 document.addEventListener('DOMContentLoaded', () => {
     // Redirect if already logged in
     if (localStorage.getItem('userSession')) {
-        window.location.href = 'index.html';
+        window.location.href = '/home';
         return;
     }
 
@@ -66,7 +66,7 @@ function setupLoginForm() {
                     localStorage.setItem('sessionId', 'sess-' + Math.random().toString(36).substr(2, 12));
                 }
                 // Redirect back to home
-                window.location.href = 'index.html';
+                window.location.href = '/home';
             } else {
                 errorMsg.textContent = data.error || 'Invalid credentials';
                 errorMsg.style.display = 'block';
@@ -136,7 +136,7 @@ function setupNavSearch() {
     if (input) {
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
-                window.location.href = `search.html?title=${encodeURIComponent(input.value.trim())}`;
+                window.location.href = `/games?title=${encodeURIComponent(input.value.trim())}`;
             }
         });
     }

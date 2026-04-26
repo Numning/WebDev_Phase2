@@ -84,7 +84,7 @@ function setupNavSearch() {
     if (input) {
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
-                window.location.href = `search.html?title=${encodeURIComponent(input.value.trim())}`;
+                window.location.href = `/games?title=${encodeURIComponent(input.value.trim())}`;
             }
         });
     }

@@ -33,6 +33,7 @@ DB_USER=root
 DB_PASSWORD=your_mysql_password_here
 DB_NAME=game_store
 PORT=3000
+GNEWS_API_KEY=your_gnews_api_key_here
 ```
 
 > **Note:** The `.env` file is excluded from git via `.gitignore` to keep credentials private.
@@ -128,9 +129,18 @@ Base URL: `http://localhost:3000/api`
 - `POST /api/wishlist` — Add to wishlist
 - `DELETE /api/wishlist/:sessionId/:gameId` — Remove from wishlist
 
+### Gaming News (Public API Proxy)
+- `GET /api/news` — Get latest gaming news (proxied from GNews API)
+
 ## Public Web Service Integration
 
-The homepage integrates the **CheapShark API** (https://www.cheapshark.com/api) to display real game deals from Steam. This is a free, no-API-key-required public API that provides current game pricing data from multiple online game stores.
+The homepage integrates the **GNews API** (https://gnews.io) to display real-time gaming news headlines. The API key is stored securely on the backend (in `.env`), and the frontend fetches news automatically from the backend proxy at `/api/news` — no user configuration needed on the website.
+
+### Setup
+1. Visit [gnews.io](https://gnews.io) and create a free account.
+2. Copy your API key from the dashboard.
+3. Paste it in `backend/.env` as `GNEWS_API_KEY=your_key_here`.
+4. Restart the backend server — gaming news will appear automatically on the homepage.
 
 ## Database
 

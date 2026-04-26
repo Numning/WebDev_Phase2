@@ -12,7 +12,7 @@ const API_BASE = 'http://localhost:3000/api';
 document.addEventListener('DOMContentLoaded', () => {
     // If already logged in, redirect to admin dashboard immediately
     if (localStorage.getItem('adminUser')) {
-        window.location.href = 'admin.html';
+        window.location.href = '/admin';
         return;
     }
 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (res.ok && data.success) {
                 // Store admin info in localStorage for session management
                 localStorage.setItem('adminUser', JSON.stringify(data.admin));
-                window.location.href = 'admin.html';
+                window.location.href = '/admin';
             } else {
                 showError(data.error || 'Invalid credentials. Please try again.');
             }

@@ -30,7 +30,7 @@ async function loadWishlist() {
                 <div class="empty-state" style="grid-column: 1/-1;">
                     <div class="icon">♡</div>
                     <p>Your wishlist is empty.</p>
-                    <a href="search.html" class="btn btn-primary" style="margin-top: 1rem;">Browse Games</a>
+                    <a href="/games" class="btn btn-primary" style="margin-top: 1rem;">Browse Games</a>
                 </div>`;
             return;
         }
@@ -52,7 +52,7 @@ async function loadWishlist() {
             return `
             <div class="card" style="position:relative;">
                 <button class="btn-danger" style="position:absolute; top:8px; right:8px; z-index:10; border-radius:50%; width:30px; height:30px; padding:0; display:flex; align-items:center; justify-content:center; border:none; cursor:pointer;" onclick="removeWishlist(${game.GameID})">✕</button>
-                <a href="detail.html?id=${game.GameID}">
+                <a href="/game?id=${game.GameID}">
                     <div class="card-image-wrapper">
                         <img src="${game.ImageUrl || 'https://via.placeholder.com/300'}" alt="${game.Title}" class="card-image">
                     </div>
@@ -116,7 +116,7 @@ function setupNavSearch() {
     if (input) {
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
-                window.location.href = `search.html?title=${encodeURIComponent(input.value.trim())}`;
+                window.location.href = `/games?title=${encodeURIComponent(input.value.trim())}`;
             }
         });
     }

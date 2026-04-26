@@ -15,24 +15,24 @@
     <!-- Header with Navigation Bar -->
     <header>
         <nav class="navbar">
-            <a href="index.html" class="logo">
+            <a href="/home" class="logo">
                 <span class="logo-icon">🎮</span>
                 <span>GAME</span>HUB
             </a>
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="search.html">Games</a>
-                <a href="team.html">Team</a>
+                <a href="/home" class="active">Home</a>
+                <a href="/games">Games</a>
+                <a href="/team">Team</a>
             </div>
             <div class="nav-search">
                 <span class="search-icon">🔍</span>
                 <input type="text" placeholder="Search games..." id="nav-search-input">
             </div>
             <div class="nav-actions">
-                <a href="wishlist.html" class="nav-icon-btn" title="Wishlist">♡</a>
-                <a href="cart.html" class="nav-icon-btn" title="Cart">🛒 <span class="cart-badge" id="cart-badge" style="display:none;"></span></a>
-                <a href="user-login.html" class="nav-icon-btn" title="Account" id="nav-user-btn">👤</a>
-                <a href="login.html" class="nav-admin-btn">⚙ Admin</a>
+                <a href="/wishlist" class="nav-icon-btn" title="Wishlist">♡</a>
+                <a href="/cart" class="nav-icon-btn" title="Cart">🛒 <span class="cart-badge" id="cart-badge" style="display:none;"></span></a>
+                <a href="/account" class="nav-icon-btn" title="Account" id="nav-user-btn">👤</a>
+                <a href="/admin/login" class="nav-admin-btn">⚙ Admin</a>
             </div>
         </nav>
     </header>
@@ -44,16 +44,16 @@
         <aside class="left-sidebar">
             <div class="sidebar-section-title" style="margin-top:0;">Browse by Genre</div>
             <div class="genre-list">
-                <a href="search.html?genre=Action">Action</a>
-                <a href="search.html?genre=RPG">RPG</a>
-                <a href="search.html?genre=Strategy">Strategy</a>
-                <a href="search.html?genre=Simulation">Simulation</a>
-                <a href="search.html?genre=Adventure">Adventure</a>
-                <a href="search.html?genre=Racing">Racing</a>
-                <a href="search.html?genre=Puzzle">Puzzle</a>
-                <a href="search.html?genre=Sci-Fi">Sci-Fi</a>
-                <a href="search.html?genre=Fighting">Fighting</a>
-                <a href="search.html?genre=Survival">Survival</a>
+                <a href="/games?genre=Action">Action</a>
+                <a href="/games?genre=RPG">RPG</a>
+                <a href="/games?genre=Strategy">Strategy</a>
+                <a href="/games?genre=Simulation">Simulation</a>
+                <a href="/games?genre=Adventure">Adventure</a>
+                <a href="/games?genre=Racing">Racing</a>
+                <a href="/games?genre=Puzzle">Puzzle</a>
+                <a href="/games?genre=Sci-Fi">Sci-Fi</a>
+                <a href="/games?genre=Fighting">Fighting</a>
+                <a href="/games?genre=Survival">Survival</a>
             </div>
         </aside>
 
@@ -133,16 +133,17 @@
                 </div>
             </section>
 
-            <!-- Section 6: Public API Deals (CheapShark Integration) -->
-            <section class="carousel-section" id="public-deals-section" style="display:none;">
-                <div class="carousel-header">
-                    <h2>🔥 Real Steam Deals (via CheapShark API) ›</h2>
-                    <div class="carousel-arrows">
-                        <button class="carousel-arrow" id="deals-prev">‹</button>
-                        <button class="carousel-arrow" id="deals-next">›</button>
+            <!-- Section 6: New Game Releases (FreeToGame API Integration) -->
+            <section class="news-section" id="gaming-news-section" style="display:none;">
+                <div class="news-section-header">
+                    <div class="news-title-group">
+                        <span class="news-icon">🎮</span>
+                        <h2>New Game Releases</h2>
+                        <span class="news-badge">FREE</span>
                     </div>
+                    <p class="news-subtitle">Latest free-to-play games — powered by FreeToGame API</p>
                 </div>
-                <div class="carousel-track" id="deals-track">
+                <div class="news-grid" id="news-grid">
                     <div class="loading-spinner">
                         <div class="spinner"></div>
                     </div>
@@ -162,10 +163,10 @@
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
-                <a href="index.html">Home</a>
-                <a href="search.html">Games</a>
-                <a href="team.html">Team</a>
-                <a href="login.html">Admin</a>
+                <a href="/home">Home</a>
+                <a href="/games">Games</a>
+                <a href="/team">Team</a>
+                <a href="/admin/login">Admin</a>
             </div>
             <div class="footer-links">
                 <h4>Connect</h4>

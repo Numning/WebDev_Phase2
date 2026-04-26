@@ -108,7 +108,7 @@ async function loadGames() {
             }
 
             return `
-            <a href="detail.html?id=${game.GameID}" class="card" style="cursor:pointer;">
+            <a href="/game?id=${game.GameID}" class="card" style="cursor:pointer;">
                 <div class="card-image-wrapper">
                     <img src="${game.ImageUrl || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop'}" 
                          alt="${game.Title}" class="card-image"
@@ -138,7 +138,7 @@ function setupNavSearch() {
     if (input) {
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
-                window.location.href = `search.html?title=${encodeURIComponent(input.value.trim())}`;
+                window.location.href = `/games?title=${encodeURIComponent(input.value.trim())}`;
             }
         });
     }

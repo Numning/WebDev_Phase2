@@ -158,7 +158,7 @@ async function loadGameDetail(id) {
 
         // ── Build Detail Page HTML ──
         container.innerHTML = `
-            <a href="search.html" class="back-to-search" id="back-to-search">← Back to Search Results</a>
+            <a href="/games" class="back-to-search" id="back-to-search">← Back to Search Results</a>
 
             <div class="detail-hero">
                 <div class="detail-slider" id="detail-slider"></div>
@@ -410,7 +410,7 @@ function setupTabs() {
  */
 function showError(msg) {
     const container = document.getElementById('detail-container');
-    container.innerHTML = `<div class="empty-state" style="padding-top:150px;"><div class="icon">😕</div><h3>${msg}</h3><a href="search.html" class="btn btn-primary" style="margin-top:1rem;">Browse Games</a></div>`;
+    container.innerHTML = `<div class="empty-state" style="padding-top:150px;"><div class="icon">😕</div><h3>${msg}</h3><a href="/games" class="btn btn-primary" style="margin-top:1rem;">Browse Games</a></div>`;
 }
 
 /**
@@ -431,7 +431,7 @@ function setupNavSearch() {
     if (input) {
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
-                window.location.href = `search.html?title=${encodeURIComponent(input.value.trim())}`;
+                window.location.href = `/games?title=${encodeURIComponent(input.value.trim())}`;
             }
         });
     }

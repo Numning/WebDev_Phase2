@@ -18,6 +18,7 @@ const reviewsRouter = require('./routes/reviews');
 const wishlistRouter = require('./routes/wishlist');
 const cartRouter = require('./routes/cart');
 const usersRouter = require('./routes/users');
+const newsRouter = require('./routes/news');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,13 +35,14 @@ app.use('/api/reviews', reviewsRouter);
 app.use('/api/wishlist', wishlistRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/news', newsRouter);
 
 // Root endpoint — API info
 app.get('/', (req, res) => {
     res.json({
         message: 'GameHub API Server',
         version: '1.0.0',
-        endpoints: ['/api/games', '/api/auth', '/api/reviews', '/api/wishlist', '/api/cart', '/api/users']
+        endpoints: ['/api/games', '/api/auth', '/api/reviews', '/api/wishlist', '/api/cart', '/api/users', '/api/news']
     });
 });
 

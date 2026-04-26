@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Redirect to login page if admin is not logged in
     const adminUser = JSON.parse(localStorage.getItem('adminUser'));
     if (!adminUser) {
-        window.location.href = 'login.html';
+        window.location.href = '/admin/login';
         return;
     }
     document.getElementById('admin-welcome').textContent = `Welcome, ${adminUser.firstName} ${adminUser.lastName}`;
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('logout-btn').addEventListener('click', (e) => {
         e.preventDefault();
         localStorage.removeItem('adminUser');
-        window.location.href = 'index.html';
+        window.location.href = '/home';
     });
 
     // ── Load Games Table ──

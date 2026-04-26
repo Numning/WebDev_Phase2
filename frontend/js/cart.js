@@ -45,7 +45,7 @@ async function loadCartItems() {
                 <div class="empty-state">
                     <div class="icon">🛒</div>
                     <p>Your cart is empty.</p>
-                    <a href="search.html" class="btn btn-primary" style="margin-top: 1rem;">Browse Games</a>
+                    <a href="/games" class="btn btn-primary" style="margin-top: 1rem;">Browse Games</a>
                 </div>`;
             document.getElementById('cart-summary').textContent = '0 items';
             document.getElementById('cart-subtotal').textContent = '฿0.00';
@@ -146,7 +146,7 @@ function setupNavSearch() {
     if (input) {
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && input.value.trim()) {
-                window.location.href = `search.html?title=${encodeURIComponent(input.value.trim())}`;
+                window.location.href = `/games?title=${encodeURIComponent(input.value.trim())}`;
             }
         });
     }
