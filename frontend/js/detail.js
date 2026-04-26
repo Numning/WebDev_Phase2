@@ -168,7 +168,7 @@ async function loadGameDetail(id) {
                     <p class="developer">by GameHub Studios · Released ${formatDate(game.ReleaseDate)}</p>
                     ${priceHtml}
                     <div class="action-buttons">
-                        <button class="btn btn-success" onclick="alert('Added to cart!')">🛒 Add to Cart</button>
+                        <button class="btn btn-success" onclick="addToCart(${game.GameID})">🛒 Add to Cart</button>
                         <button class="btn btn-primary" onclick="alert('${buttonText}!')">${buttonText}</button>
                         <button class="${wishBtnClass}" id="wishlist-btn" data-game-id="${game.GameID}" style="margin-top:8px; width:100%;">${wishBtnText}</button>
                     </div>
@@ -249,6 +249,7 @@ async function loadGameDetail(id) {
         renderSlider(gallery, game.Title);
         setupTabs();
         setupReviewForm(id);
+        updateCartBadge();
         setupWishlistBtn(id);
 
     } catch (err) {
@@ -434,4 +435,50 @@ function setupNavSearch() {
             }
         });
     }
+}
+
+/**
+ * Adds a game to the shopping cart via the backend API.
+ * @param {number} gameId - The ID of the game to add
+ */
+async function addToCart(gameId) {
+    const sessionId = localStorage.getItem('sessionId');
+    try {
+        const res = await fetch(`${API_BASE}/cart`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ gameId, sessionId })
+        });
+        if (res.ok) {
+            updateCartBadge();
+            // Show brief success feedback
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Added!';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1500);
+        }
+    } catch (err) {
+        console.error('Error adding to cart:', err);
+    }
+}
+
+/**
+ * Updates the cart badge count in the navbar.
+ */
+async function updateCartBadge() {
+    const sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) return;
+    try {
+        const res = await fetch(`${API_BASE}/cart/count/${sessionId}`);
+        const data = await res.json();
+        const badges = document.querySelectorAll('.cart-badge');
+        badges.forEach(b => {
+            b.textContent = data.count > 0 ? data.count : '';
+            b.style.display = data.count > 0 ? 'inline-block' : 'none';
+        });
+    } catch(e) {}
 }

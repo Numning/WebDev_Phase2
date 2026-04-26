@@ -136,6 +136,23 @@ router.put('/:cartId', async (req, res) => {
 });
 
 /**
+ * DELETE /api/cart/clear/:sessionId
+ * Clears all items from the cart for a session.
+ */
+router.delete('/clear/:sessionId', async (req, res) => {
+    try {
+        await pool.query(
+            'DELETE FROM Cart WHERE SessionID = ?',
+            [req.params.sessionId]
+        );
+        res.json({ message: 'Cart cleared' });
+    } catch (err) {
+        console.error('Error clearing cart:', err);
+        res.status(500).json({ error: 'Failed to clear cart' });
+    }
+});
+
+/**
  * DELETE /api/cart/:cartId
  * Removes a single item from the cart.
  */
@@ -152,23 +169,6 @@ router.delete('/:cartId', async (req, res) => {
     } catch (err) {
         console.error('Error removing from cart:', err);
         res.status(500).json({ error: 'Failed to remove from cart' });
-    }
-});
-
-/**
- * DELETE /api/cart/clear/:sessionId
- * Clears all items from the cart for a session.
- */
-router.delete('/clear/:sessionId', async (req, res) => {
-    try {
-        await pool.query(
-            'DELETE FROM Cart WHERE SessionID = ?',
-            [req.params.sessionId]
-        );
-        res.json({ message: 'Cart cleared' });
-    } catch (err) {
-        console.error('Error clearing cart:', err);
-        res.status(500).json({ error: 'Failed to clear cart' });
     }
 });
 

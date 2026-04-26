@@ -6,28 +6,36 @@ A full-stack web application for a game store, featuring a **separate frontend**
 
 - **frontend/** (`secX_grY_fe_src`): Static frontend files (HTML, CSS, JS) served by its own Express server.
 - **backend/** (`secX_grY_ws_src`): Node.js Express backend server providing RESTful API web services.
-- **GameStock.csv**: Game data imported into the database on first run.
-- **backend/schema.sql** (`secX_grY_database.sql`): Database schema with 10 tables.
+- **backend/schema.sql** (`secX_grY_database.sql`): Database schema with 10 tables and all seed data.
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) (v14 or higher recommended)
-- [MySQL](https://www.mysql.com/) server (running and accessible)
+- [MySQL](https://www.mysql.com/) server installed locally and running (tested with MySQL 9.7)
 
 ## How to Run
 
-### 1. Configure Database Connection (if needed)
+### 1. Configure Database Connection
 
-The default database connection settings are in `backend/db.js`:
+Copy the example environment file and fill in your MySQL credentials:
 
-| Setting  | Default Value |
-| -------- | ------------- |
-| Host     | `localhost`   |
-| Port     | `3307`        |
-| User     | `root`        |
-| Password | _(empty)_     |
+```bash
+cd backend
+cp .env.example .env
+```
 
-> **Note:** The default MySQL port is usually `3306`. If your MySQL uses `3306`, update the port in `backend/db.js`.
+Then edit `backend/.env` with your settings:
+
+```env
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=your_mysql_password_here
+DB_NAME=game_store
+PORT=3000
+```
+
+> **Note:** The `.env` file is excluded from git via `.gitignore` to keep credentials private.
 
 ### 2. Install & Start the Backend Server (Port 3000)
 
@@ -40,9 +48,8 @@ npm start
 The backend server will **automatically**:
 
 1. Create the `game_store` database if it doesn't exist.
-2. Create all required tables (10 tables) and seed admin data on first run.
-3. Import game data from `GameStock.csv`.
-4. Start the Express API server on port **3000**.
+2. Create all required tables (10 tables) and insert seed data (games, genres, admins, reviews, users) on first run.
+3. Start the Express API server on port **3000**.
 
 ### 3. Install & Start the Frontend Server (Port 5500)
 
@@ -154,4 +161,5 @@ The database consists of **10 tables**:
 
 - The frontend and backend run on **separate servers** (ports 5500 and 3000 respectively).
 - CORS is enabled on the backend to allow cross-origin requests from the frontend.
-- Game data is imported from `GameStock.csv` on first database initialization.
+- All seed data (19 games, genres, admins, reviews, users) is defined in `schema.sql` as SQL INSERT statements.
+- No Docker required — uses local MySQL server directly.
