@@ -1,4 +1,4 @@
-﻿-- ============================================
+-- ============================================
 -- GameHub Database Schema + Seed Data
 -- All tables and data for the GameHub application
 -- ============================================
@@ -68,7 +68,18 @@ CREATE TABLE IF NOT EXISTS Review (
     FOREIGN KEY (GameID) REFERENCES Game(GameID) ON DELETE CASCADE
 );
 
--- Table 7: Wishlist (SessionID for anonymous, UserID for logged-in users)
+-- Table 7: User
+CREATE TABLE IF NOT EXISTS User (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(100) UNIQUE NOT NULL,
+    Email VARCHAR(150) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    FirstName VARCHAR(100) NOT NULL,
+    LastName VARCHAR(100) NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table 8: Wishlist (SessionID for anonymous, UserID for logged-in users)
 CREATE TABLE IF NOT EXISTS Wishlist (
     WishlistID INT AUTO_INCREMENT PRIMARY KEY,
     GameID INT NOT NULL,
@@ -80,7 +91,7 @@ CREATE TABLE IF NOT EXISTS Wishlist (
     UNIQUE KEY unique_wishlist (GameID, SessionID)
 );
 
--- Table 8: AdminAddGame
+-- Table 9: AdminAddGame
 CREATE TABLE IF NOT EXISTS AdminAddGame (
     AddID INT AUTO_INCREMENT PRIMARY KEY,
     AdminID INT NOT NULL,
@@ -91,7 +102,7 @@ CREATE TABLE IF NOT EXISTS AdminAddGame (
     UNIQUE KEY unique_admin_game (AdminID, GameID)
 );
 
--- Table 9: Cart (SessionID for anonymous, UserID for logged-in users, max 1 per game)
+-- Table 10: Cart (SessionID for anonymous, UserID for logged-in users, max 1 per game)
 CREATE TABLE IF NOT EXISTS Cart (
     CartID INT AUTO_INCREMENT PRIMARY KEY,
     GameID INT NOT NULL,
@@ -103,31 +114,20 @@ CREATE TABLE IF NOT EXISTS Cart (
     FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE SET NULL
 );
 
--- Table 10: User
-CREATE TABLE IF NOT EXISTS User (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(100) UNIQUE NOT NULL,
-    Email VARCHAR(150) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL,
-    FirstName VARCHAR(100) NOT NULL,
-    LastName VARCHAR(100) NOT NULL,
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
 -- ============================================
 -- SEED DATA
 -- ============================================
 
 -- Administrators (password for all: admin123)
-INSERT INTO Administrator (FirstName, LastName, Age, Address, Email) VALUES
-('Admin', 'User', 30, '123 Admin Street, Bangkok', 'admin@gamehub.com'),
-('Sarah', 'Johnson', 28, '456 Tech Road, Chiang Mai', 'sarah@gamehub.com'),
-('Mike', 'Chen', 35, '789 Game Ave, Phuket', 'mike@gamehub.com');
+INSERT INTO Administrator (FirstName, LastName, Age, Address, Email, Role) VALUES
+('Admin', 'User', 30, '123 Admin Street, Bangkok', 'admin@gamehub.com', 'Super Admin'),
+('Sarah', 'Johnson', 28, '456 Tech Road, Chiang Mai', 'sarah@gamehub.com', 'Content Manager'),
+('Mike', 'Chen', 35, '789 Game Ave, Phuket', 'mike@gamehub.com', 'Content Manager');
 
 INSERT INTO AdminLogin (AdminID, Username, Password, Role, LastLoginLog) VALUES
-(1, 'admin', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'SuperAdmin', NOW()),
-(2, 'sarah', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager', NOW()),
-(3, 'mike', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager', NOW());
+(1, 'admin', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Super Admin', NOW()),
+(2, 'sarah', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager',     NOW()),
+(3, 'mike',  '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager',     NOW());
 
 -- Genres
 INSERT INTO Genre (Name) VALUES
@@ -265,13 +265,13 @@ INSERT INTO AdminAddGame (AdminID, GameID) VALUES
 (2,8),(2,9),(2,10),(2,11),(2,12),
 (3,13),(3,14),(3,15),(3,16),(3,17),(3,18),(3,19);
 
--- Users (password for all: password123 — same bcrypt hash as admin123 for demo)
+-- Users (password for all: user123)
 INSERT INTO User (Username, Email, Password, FirstName, LastName) VALUES
-('john_doe', 'john@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'John', 'Doe'),
-('jane_smith', 'jane@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Jane', 'Smith'),
-('alex_gamer', 'alex@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Alex', 'Wong'),
-('player_one', 'player1@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Sam', 'Lee'),
-('pro_gamer', 'pro@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Chris', 'Park');
+('john_doe',   'john@email.com',    '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'John',  'Doe'),
+('jane_smith', 'jane@email.com',    '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Jane',  'Smith'),
+('alex_gamer', 'alex@email.com',    '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Alex',  'Wong'),
+('player_one', 'player1@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Sam',   'Lee'),
+('pro_gamer',  'pro@email.com',     '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Chris', 'Park');
 
 -- ============================================
 -- Additional Games (from GAME.csv)
@@ -320,17 +320,16 @@ INSERT IGNORE INTO AdminAddGame (AdminID, GameID) VALUES
 (1,20),(1,21),(1,22),(1,23),(1,24);
 
 -- Additional seed data (10+ records per table)
-USE game_store;
 
 -- Add 7 more Administrators (total -> 10)
-INSERT IGNORE INTO Administrator (AdminID, FirstName, LastName, Age, Address, Email) VALUES
-(4,  'Lisa',    'Park',       26, '321 Dev Lane, Bangkok',      'lisa@gamehub.com'),
-(5,  'Tom',     'Wilson',     32, '654 Code St, Pattaya',       'tom@gamehub.com'),
-(6,  'Emma',    'Davis',      29, '987 Script Ave, Chiang Rai', 'emma@gamehub.com'),
-(7,  'James',   'Kim',        31, '111 Api Blvd, Hat Yai',      'james@gamehub.com'),
-(8,  'Sophia',  'Lee',        27, '222 Query Rd, Nonthaburi',   'sophia@gamehub.com'),
-(9,  'Oliver',  'Brown',      34, '333 Index Way, Samut Prakan','oliver@gamehub.com'),
-(10, 'Isabella','Garcia',     25, '444 Cache St, Rayong',       'isabella@gamehub.com');
+INSERT IGNORE INTO Administrator (AdminID, FirstName, LastName, Age, Address, Email, Role) VALUES
+(4,  'Lisa',     'Park',    26, '321 Dev Lane, Bangkok',       'lisa@gamehub.com',     'Manager'),
+(5,  'Tom',      'Wilson',  32, '654 Code St, Pattaya',        'tom@gamehub.com',      'Manager'),
+(6,  'Emma',     'Davis',   29, '987 Script Ave, Chiang Rai',  'emma@gamehub.com',     'Manager'),
+(7,  'James',    'Kim',     31, '111 Api Blvd, Hat Yai',       'james@gamehub.com',    'Manager'),
+(8,  'Sophia',   'Lee',     27, '222 Query Rd, Nonthaburi',    'sophia@gamehub.com',   'Moderator'),
+(9,  'Oliver',   'Brown',   34, '333 Index Way, Samut Prakan', 'oliver@gamehub.com',   'Moderator'),
+(10, 'Isabella', 'Garcia',  25, '444 Cache St, Rayong',        'isabella@gamehub.com', 'Moderator');
 
 -- Add 7 more AdminLogins (same password hash: admin123)
 INSERT IGNORE INTO AdminLogin (AdminID, Username, Password, Role, LastLoginLog) VALUES
@@ -350,31 +349,30 @@ INSERT IGNORE INTO User (Username, Email, Password, FirstName, LastName) VALUES
 ('indie_fan',    'indie@email.com',  '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Napat',   'Wongkham'),
 ('casual_play',  'casual@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Pranee',  'Chaichan');
 
--- Add 9 more Wishlist entries (total -> 10)
-INSERT IGNORE INTO Wishlist (GameID, SessionID) VALUES
-(2,  'sess-demo-0001'),
-(3,  'sess-demo-0001'),
-(5,  'sess-demo-0002'),
-(8,  'sess-demo-0002'),
-(11, 'sess-demo-0003'),
-(12, 'sess-demo-0003'),
-(20, 'sess-demo-0004'),
-(22, 'sess-demo-0004'),
-(24, 'sess-demo-0005');
+-- Add 9 more Wishlist entries (total -> 10) — with UserID for logged-in users
+INSERT IGNORE INTO Wishlist (GameID, SessionID, UserID) VALUES
+(2,  'sess-demo-0001', 1),
+(3,  'sess-demo-0001', 1),
+(5,  'sess-demo-0002', 2),
+(8,  'sess-demo-0002', 2),
+(11, 'sess-demo-0003', 3),
+(12, 'sess-demo-0003', 3),
+(20, 'sess-demo-0004', 4),
+(22, 'sess-demo-0004', 4),
+(24, 'sess-demo-0005', 5);
 
--- Add 8 more Cart entries (total -> 10)
-INSERT IGNORE INTO Cart (GameID, SessionID, Quantity) VALUES
-(1,  'sess-demo-0001', 1),
-(4,  'sess-demo-0001', 1),
-(6,  'sess-demo-0002', 1),
-(9,  'sess-demo-0002', 1),
-(13, 'sess-demo-0003', 1),
-(16, 'sess-demo-0003', 1),
-(21, 'sess-demo-0004', 1),
-(23, 'sess-demo-0005', 1);
+-- Add 8 more Cart entries (total -> 10) — with UserID for logged-in users
+INSERT IGNORE INTO Cart (GameID, SessionID, UserID, Quantity) VALUES
+(1,  'sess-demo-0001', 1, 1),
+(4,  'sess-demo-0001', 1, 1),
+(6,  'sess-demo-0002', 2, 1),
+(9,  'sess-demo-0002', 2, 1),
+(13, 'sess-demo-0003', 3, 1),
+(16, 'sess-demo-0003', 3, 1),
+(21, 'sess-demo-0004', 4, 1),
+(23, 'sess-demo-0005', 5, 1);
 
 -- Additional reviews for new games
-USE game_store;
 
 INSERT INTO Review (GameID, ReviewerName, Rating, Comment) VALUES
 -- Wuthering Waves

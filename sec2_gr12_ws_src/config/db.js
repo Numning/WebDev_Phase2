@@ -79,8 +79,11 @@ async function initDatabase() {
         const schemaPath = path.join(__dirname, '..', 'sec2_gr12_database.sql');
         const schemaSql = fs.readFileSync(schemaPath, 'utf-8');
 
-        // Split into individual statements and execute each one
+        // Strip single-line SQL comments, then split into statements
         const statements = schemaSql
+            .split('\n')
+            .filter(line => !line.trim().startsWith('--'))   // remove comment lines
+            .join('\n')
             .split(';')
             .map(s => s.trim())
             .filter(s => s.length > 0)
