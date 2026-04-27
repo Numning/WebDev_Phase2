@@ -141,12 +141,37 @@ The frontend is a fully responsive multi-page application with clean URL routing
 
 > Old `.html` URLs automatically redirect to clean URLs (e.g., `/index.html` → `/home`).
 
-## Default Admin Credentials
+## Default Credentials
 
-| Field    | Value      |
-| -------- | ---------- |
-| Username | `admin`    |
-| Password | `admin123` |
+### Admin Accounts (all share the same password)
+
+| Username   | Password   | Role            |
+| ---------- | ---------- | --------------- |
+| `admin`    | `admin123` | Super Admin     |
+| `sarah`    | `admin123` | Manager         |
+| `mike`     | `admin123` | Manager         |
+| `lisa`     | `admin123` | Manager         |
+| `lucas`    | `admin123` | Manager         |
+| `mia`      | `admin123` | Manager         |
+| `sophia`   | `admin123` | Moderator       |
+| `oliver`   | `admin123` | Moderator       |
+| `noah`     | `admin123` | Moderator       |
+| `olivia`   | `admin123` | Moderator       |
+| `ethan`    | `admin123` | Content Manager |
+
+### User Accounts (all share the same password)
+
+| Username          | Password   | Name            |
+| ----------------- | ---------- | --------------- |
+| `john_doe`        | `user123`  | John Doe        |
+| `jane_smith`      | `user123`  | Jane Smith      |
+| `alex_gamer`      | `user123`  | Alex Wong       |
+| `gamer_thai`      | `user123`  | Somsak Jaidee   |
+| `space_gamer`     | `user123`  | Alex Chen       |
+| `night_hunter`    | `user123`  | Sara Kim        |
+| `pixel_master`    | `user123`  | Mike Ross       |
+| `loot_goblin`     | `user123`  | Tanya Singh     |
+| `open_world_fan`  | `user123`  | Leo Tanaka      |
 
 ## API Endpoints (Backend — Port 3000)
 

@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS Administrator (
     LastName VARCHAR(100) NOT NULL,
     Age INT,
     Address VARCHAR(255),
-    Email VARCHAR(150) UNIQUE NOT NULL
+    Email VARCHAR(150) UNIQUE NOT NULL,
+    Role VARCHAR(50) DEFAULT 'Admin'
 );
 
 -- Table 2: AdminLogin
@@ -67,13 +68,15 @@ CREATE TABLE IF NOT EXISTS Review (
     FOREIGN KEY (GameID) REFERENCES Game(GameID) ON DELETE CASCADE
 );
 
--- Table 7: Wishlist
+-- Table 7: Wishlist (SessionID for anonymous, UserID for logged-in users)
 CREATE TABLE IF NOT EXISTS Wishlist (
     WishlistID INT AUTO_INCREMENT PRIMARY KEY,
     GameID INT NOT NULL,
     SessionID VARCHAR(100) NOT NULL,
+    UserID INT NULL,
     AddedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (GameID) REFERENCES Game(GameID) ON DELETE CASCADE,
+    FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE SET NULL,
     UNIQUE KEY unique_wishlist (GameID, SessionID)
 );
 
@@ -88,14 +91,16 @@ CREATE TABLE IF NOT EXISTS AdminAddGame (
     UNIQUE KEY unique_admin_game (AdminID, GameID)
 );
 
--- Table 9: Cart
+-- Table 9: Cart (SessionID for anonymous, UserID for logged-in users, max 1 per game)
 CREATE TABLE IF NOT EXISTS Cart (
     CartID INT AUTO_INCREMENT PRIMARY KEY,
     GameID INT NOT NULL,
     SessionID VARCHAR(100) NOT NULL,
+    UserID INT NULL,
     Quantity INT DEFAULT 1,
     AddedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (GameID) REFERENCES Game(GameID) ON DELETE CASCADE
+    FOREIGN KEY (GameID) REFERENCES Game(GameID) ON DELETE CASCADE,
+    FOREIGN KEY (UserID) REFERENCES User(UserID) ON DELETE SET NULL
 );
 
 -- Table 10: User
@@ -120,9 +125,9 @@ INSERT INTO Administrator (FirstName, LastName, Age, Address, Email) VALUES
 ('Mike', 'Chen', 35, '789 Game Ave, Phuket', 'mike@gamehub.com');
 
 INSERT INTO AdminLogin (AdminID, Username, Password, Role, LastLoginLog) VALUES
-(1, 'admin', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'SuperAdmin', NOW()),
-(2, 'sarah', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager', NOW()),
-(3, 'mike', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager', NOW());
+(1, 'admin', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'SuperAdmin', NOW()),
+(2, 'sarah', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager', NOW()),
+(3, 'mike', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager', NOW());
 
 -- Genres
 INSERT INTO Genre (Name) VALUES
@@ -262,11 +267,11 @@ INSERT INTO AdminAddGame (AdminID, GameID) VALUES
 
 -- Users (password for all: password123 — same bcrypt hash as admin123 for demo)
 INSERT INTO User (Username, Email, Password, FirstName, LastName) VALUES
-('john_doe', 'john@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'John', 'Doe'),
-('jane_smith', 'jane@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Jane', 'Smith'),
-('alex_gamer', 'alex@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Alex', 'Wong'),
-('player_one', 'player1@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Sam', 'Lee'),
-('pro_gamer', 'pro@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Chris', 'Park');
+('john_doe', 'john@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'John', 'Doe'),
+('jane_smith', 'jane@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Jane', 'Smith'),
+('alex_gamer', 'alex@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Alex', 'Wong'),
+('player_one', 'player1@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Sam', 'Lee'),
+('pro_gamer', 'pro@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Chris', 'Park');
 
 -- ============================================
 -- Additional Games (from GAME.csv)
@@ -329,21 +334,21 @@ INSERT IGNORE INTO Administrator (AdminID, FirstName, LastName, Age, Address, Em
 
 -- Add 7 more AdminLogins (same password hash: admin123)
 INSERT IGNORE INTO AdminLogin (AdminID, Username, Password, Role, LastLoginLog) VALUES
-(4,  'lisa',     '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
-(5,  'tom',      '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
-(6,  'emma',     '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
-(7,  'james',    '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
-(8,  'sophia',   '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Moderator', NOW()),
-(9,  'oliver',   '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Moderator', NOW()),
-(10, 'isabella', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Moderator', NOW());
+(4,  'lisa',     '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager',   NOW()),
+(5,  'tom',      '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager',   NOW()),
+(6,  'emma',     '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager',   NOW()),
+(7,  'james',    '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Manager',   NOW()),
+(8,  'sophia',   '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Moderator', NOW()),
+(9,  'oliver',   '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Moderator', NOW()),
+(10, 'isabella', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Moderator', NOW());
 
 -- Add 5 more Users (total -> 10)
 INSERT IGNORE INTO User (Username, Email, Password, FirstName, LastName) VALUES
-('gamer_thai',   'thai@email.com',   '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Somsak',  'Jaidee'),
-('rpg_lover',    'rpg@email.com',    '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Wanida',  'Sukjai'),
-('fps_king',     'fps@email.com',    '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Arjun',   'Patel'),
-('indie_fan',    'indie@email.com',  '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Napat',   'Wongkham'),
-('casual_play',  'casual@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Pranee',  'Chaichan');
+('gamer_thai',   'thai@email.com',   '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Somsak',  'Jaidee'),
+('rpg_lover',    'rpg@email.com',    '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Wanida',  'Sukjai'),
+('fps_king',     'fps@email.com',    '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Arjun',   'Patel'),
+('indie_fan',    'indie@email.com',  '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Napat',   'Wongkham'),
+('casual_play',  'casual@email.com', '$2a$10$Xh5fRfsJD4OVDvQ7ug.1gO69QSKX6yEbEwMn/dv01uFe/efjSBwWe', 'Pranee',  'Chaichan');
 
 -- Add 9 more Wishlist entries (total -> 10)
 INSERT IGNORE INTO Wishlist (GameID, SessionID) VALUES
@@ -405,3 +410,39 @@ INSERT INTO Review (GameID, ReviewerName, Rating, Comment) VALUES
 -- Terraria (new)
 (24, 'DiamondPickaxe',5, 'So much content for the price. The boss progression is fantastic.'),
 (24, 'BuilderPro',    4, 'More content than most full-price games. A timeless classic.');
+
+-- ============================================
+-- Schema v3: Role in Administrator, UserID in Cart/Wishlist, 15+ records per table
+-- ============================================
+-- Administrator roles
+UPDATE Administrator SET Role = 'Super Admin'     WHERE AdminID = 1;
+UPDATE Administrator SET Role = 'Content Manager' WHERE AdminID IN (2, 3);
+UPDATE Administrator SET Role = 'Manager'         WHERE AdminID IN (4, 5, 6, 7);
+UPDATE Administrator SET Role = 'Moderator'       WHERE AdminID IN (8, 9, 10);
+
+INSERT IGNORE INTO Administrator (AdminID, FirstName, LastName, Age, Address, Email, Role) VALUES
+(11,'Lucas',  'Martinez',28,'555 Node Way, Bangkok',      'lucas@gamehub.com',  'Manager'),
+(12,'Mia',    'Johnson', 30,'666 React Blvd, Chiang Mai', 'mia@gamehub.com',    'Manager'),
+(13,'Noah',   'Williams',26,'777 Vue St, Phuket',          'noah@gamehub.com',   'Moderator'),
+(14,'Olivia', 'Taylor',  33,'888 Angular Ave, Hua Hin',   'olivia@gamehub.com', 'Moderator'),
+(15,'Ethan',  'Anderson',29,'999 Express Rd, Nakhon',     'ethan@gamehub.com',  'Content Manager');
+
+INSERT IGNORE INTO AdminLogin (AdminID, Username, Password, Role, LastLoginLog) VALUES
+(11,'lucas', '$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Manager',         NOW()),
+(12,'mia',   '$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Manager',         NOW()),
+(13,'noah',  '$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Moderator',       NOW()),
+(14,'olivia','$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Moderator',       NOW()),
+(15,'ethan', '$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Content Manager', NOW());
+
+INSERT IGNORE INTO User (Username, Email, Password, FirstName, LastName) VALUES
+('space_gamer',   'space@email.com','$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Alex',  'Chen'),
+('night_hunter',  'night@email.com','$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Sara',  'Kim'),
+('pixel_master',  'pixel@email.com','$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Mike',  'Ross'),
+('loot_goblin',   'loot@email.com', '$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Tanya', 'Singh'),
+('open_world_fan','world@email.com','$2a$10$7xnat2HXv8ZduAf6eiOjx.0koiNuRNWhg4Hf61pwzTaxKhYwvcE6i','Leo',   'Tanaka');
+
+INSERT IGNORE INTO Wishlist (GameID, SessionID, UserID) VALUES
+(7,  'sess-user-0001',1),(10,'sess-user-0001',1),(14,'sess-user-0002',2),(17,'sess-user-0002',2),(19,'sess-user-0003',3);
+
+INSERT IGNORE INTO Cart (GameID, SessionID, UserID, Quantity) VALUES
+(2,'sess-user-0001',1,1),(11,'sess-user-0002',2,1),(18,'sess-user-0002',2,1),(20,'sess-user-0003',3,1),(22,'sess-user-0004',4,1);
