@@ -1,4 +1,4 @@
-﻿/**
+/**
  * admin.js —Admin Dashboard Logic
  * 
  * Manages the administrator dashboard for game management (CRUD operations).
@@ -155,7 +155,7 @@ function addGalleryInput(value) {
     row.style.cssText = 'display: flex; gap: 8px; margin-bottom: 8px; align-items: center;';
     row.innerHTML = `
         <input type="url" class="form-control gallery-url-input" value="${value}" placeholder="https://example.com/screenshot.jpg" style="flex:1;">
-        <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()" style="flex-shrink:0;"><i class="icon-x"></i>/button>
+        <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()" style="flex-shrink:0;"><i class="icon-x"></i></button>
     `;
     container.appendChild(row);
 }
@@ -353,7 +353,8 @@ async function deleteGame(id, title) {
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    toast.innerHTML = `${type === 'success' ? '<i class="icon-x"></i> : '<i class="icon-x-circle"></i>E} ${message}`;
+    const icon = type === 'success' ? '<i class="icon-check-circle"></i>' : '<i class="icon-x-circle"></i>';
+    toast.innerHTML = `${icon} ${message}`;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
 }

@@ -19,6 +19,9 @@ WebDev_Phase2/
 │   │   ├── login.js        # Admin login authentication
 │   │   ├── user-login.js   # User registration & login
 │   │   └── team.js         # Team member cards
+│   ├── images/             # Local static images
+│   │   ├── games/          # Game cover images (front.jpg) and screenshots (detail_N.jpg)
+│   │   └── team/           # Team member profile photos (studentId.jpg)
 │   ├── index.html          # Home page
 │   ├── search.html         # Browse/Search games page
 │   ├── detail.html         # Game detail page
@@ -85,7 +88,7 @@ npm start
 The backend server will **automatically**:
 
 1. Create the `game_store` database if it doesn't exist.
-2. Create all required tables (10 tables) and insert seed data (games, genres, admins, reviews, users) on first run.
+2. Create all required tables (10 tables) and insert seed data (**24 games**, genres, admins, reviews, users) on first run.
 3. Start the Express API server on port **3000**.
 
 ### 3. Install & Start the Frontend Server (Port 5500)
@@ -172,14 +175,15 @@ Base URL: `http://localhost:3000/api`
 
 ### Shopping Cart
 
-| Method | Endpoint                       | Description              |
-| ------ | ------------------------------ | ------------------------ |
-| GET    | `/api/cart/:sessionId`         | Get cart items           |
-| GET    | `/api/cart/count/:sessionId`   | Get cart item count      |
-| POST   | `/api/cart`                    | Add a game to cart       |
-| PUT    | `/api/cart/:cartId`            | Update cart item quantity |
-| DELETE | `/api/cart/:cartId`            | Remove a single item     |
-| DELETE | `/api/cart/clear/:sessionId`   | Clear entire cart        |
+| Method | Endpoint                       | Description                          |
+| ------ | ------------------------------ | ------------------------------------ |
+| GET    | `/api/cart/:sessionId`         | Get cart items                       |
+| GET    | `/api/cart/count/:sessionId`   | Get cart item count                  |
+| POST   | `/api/cart`                    | Add a game to cart (1 per game max)  |
+| DELETE | `/api/cart/:cartId`            | Remove a single item                 |
+| DELETE | `/api/cart/clear/:sessionId`   | Clear entire cart                    |
+
+> **Cart Rule:** Each game can only be added **once per session**. Attempting to add a duplicate returns `{ message: 'Already in cart' }` without creating a duplicate entry.
 
 ### Wishlist
 
@@ -222,13 +226,14 @@ The database consists of **10 tables**:
 ## Core Frontend Features
 
 - **Storefront Navigation**: Browse games by genre, search by title, and filter by price.
-- **Shopping Cart**: Add games, update quantities, dynamic cart badge, view total subtotal/discounts.
+- **Shopping Cart**: Add games to cart (1 copy per game per session), dynamic cart badge, view total subtotal/discounts.
 - **Wishlist**: Save games for later and easily move them to cart.
 - **User Authentication**: Register and sign-in pages for customers.
 - **Admin Dashboard**: Full CRUD system to manage the game catalog, update pricing, and set games on 'Sale' or 'Free'.
 - **Gaming News**: Real-time free-to-play game releases from FreeToGame public API.
-- **Image Gallery**: Detail page with image slider and thumbnail navigation.
-- **Review System**: Users can submit and view ratings and reviews for each game.
+- **Image Gallery**: Detail page with image slider and thumbnail navigation using **local hosted images**.
+- **Review System**: Users can submit and view ratings and reviews for each game with star distribution chart.
+- **Team Page**: Real profile photos served from local `/images/team/` directory.
 
 ## Tech Stack
 
@@ -245,6 +250,10 @@ The database consists of **10 tables**:
 
 - The frontend and backend run on **separate servers** (ports 5500 and 3000 respectively).
 - CORS is enabled on the backend to allow cross-origin requests from the frontend.
-- All seed data (19 games, genres, admins, reviews, users) is defined in `sec2_gr12_database.sql` as SQL INSERT statements.
+- All seed data (**24 games**, genres, 10 admins, 20+ reviews, 10 users, 10 cart records, 10 wishlist entries) is defined in `sec2_gr12_database.sql`.
+- Game images are **hosted locally** under `sec2_gr12_fe_src/images/games/<GameFolder>/` — `front.jpg` is the card image, `detail_N.jpg` files form the gallery slider.
+- Team profile photos are hosted locally at `sec2_gr12_fe_src/images/team/<studentId>.jpg`.
+- Cart enforces a **1 copy per game** rule per session — adding the same game twice returns an `'Already in cart'` response.
 - No Docker required — uses local MySQL server directly.
 - Clean URL routing is handled by Express Router on the frontend server.
+- The `/images` static route in `server.js` serves all game and team images from the `images/` directory.

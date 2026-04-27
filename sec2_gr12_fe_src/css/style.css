@@ -2451,13 +2451,15 @@ select.form-control {
 
 /* Team avatar image instead of initials */
 .team-avatar-img {
-  width: 100px;
-  height: 100px;
+  display: block;
+  width: 120px;
+  height: 120px;
   border-radius: var(--radius-full);
   object-fit: cover;
-  margin-bottom: var(--space-md);
+  margin: 0 auto var(--space-md);
   border: 3px solid var(--accent-primary);
   background: var(--bg-card);
+  box-shadow: 0 8px 24px rgba(233, 30, 99, 0.25);
 }
 
 /* Social media link on team card */

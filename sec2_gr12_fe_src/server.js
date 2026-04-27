@@ -16,6 +16,7 @@ const PORT = process.env.FE_PORT || 5500;
 // Serve css, js, and other static assets from the current directory
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // --- Page Routes (Clean URLs) ---
 // Each route serves the corresponding HTML file

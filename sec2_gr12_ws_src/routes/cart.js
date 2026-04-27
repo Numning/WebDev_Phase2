@@ -84,27 +84,23 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ error: 'gameId and sessionId are required' });
         }
 
-        // Check if game already in cart
+        // Check if game already in cart — enforce 1 per game rule
         const [existing] = await pool.query(
-            'SELECT CartID, Quantity FROM Cart WHERE GameID = ? AND SessionID = ?',
+            'SELECT CartID FROM Cart WHERE GameID = ? AND SessionID = ?',
             [gameId, sessionId]
         );
 
         if (existing.length > 0) {
-            // Increment quantity
-            await pool.query(
-                'UPDATE Cart SET Quantity = Quantity + 1 WHERE CartID = ?',
-                [existing[0].CartID]
-            );
-            res.json({ cartId: existing[0].CartID, message: 'Cart quantity updated' });
-        } else {
-            // Insert new cart item
-            const [result] = await pool.query(
-                'INSERT INTO Cart (GameID, SessionID, Quantity) VALUES (?, ?, 1)',
-                [gameId, sessionId]
-            );
-            res.status(201).json({ cartId: result.insertId, message: 'Added to cart' });
+            // Already in cart — do not add duplicate
+            return res.json({ cartId: existing[0].CartID, message: 'Already in cart' });
         }
+
+        // Insert new cart item with quantity fixed at 1
+        const [result] = await pool.query(
+            'INSERT INTO Cart (GameID, SessionID, Quantity) VALUES (?, ?, 1)',
+            [gameId, sessionId]
+        );
+        res.status(201).json({ cartId: result.insertId, message: 'Added to cart' });
     } catch (err) {
         console.error('Error adding to cart:', err);
         res.status(500).json({ error: 'Failed to add to cart' });

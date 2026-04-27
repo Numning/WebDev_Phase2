@@ -1,4 +1,4 @@
--- ============================================
+﻿-- ============================================
 -- GameHub Database Schema + Seed Data
 -- All tables and data for the GameHub application
 -- ============================================
@@ -135,61 +135,61 @@ INSERT INTO Genre (Name) VALUES
 
 -- Games (19 games from original data)
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Honkai: Star Rail', 0.00, 'Free', 0, 'A turn-based role-playing game set in a sci-fi fantasy universe. Players travel across different planets aboard the Astral Express, engaging in strategic combat, following a story-driven narrative, and collecting characters through gacha mechanics.', '2023-04-26', 'https://fastcdn.hoyoverse.com/content-v2/hkrpg/162681/8698fae5d74a28e18f0202a4a894d0f3_5567579011815628028.jpg', '["https://fastcdn.hoyoverse.com/content-v2/hkrpg/162706/df81716190a76d5d73ffd08c884c9a62_5517566128415751305.png","https://fastcdn.hoyoverse.com/content-v2/hkrpg/162589/d7f16733ce24ce17e0a200a4d3f0e870_4485408830878176463.jpg"]');
+('Honkai: Star Rail', 0.00, 'Free', 0, 'A turn-based role-playing game set in a sci-fi fantasy universe. Players travel across different planets aboard the Astral Express, engaging in strategic combat, following a story-driven narrative, and collecting characters through gacha mechanics.', '2023-04-26', '/images/games/Honkai_StarRail/front.jpg', '["https://fastcdn.hoyoverse.com/content-v2/hkrpg/162706/df81716190a76d5d73ffd08c884c9a62_5517566128415751305.png","https://fastcdn.hoyoverse.com/content-v2/hkrpg/162589/d7f16733ce24ce17e0a200a4d3f0e870_4485408830878176463.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Genshin Impact', 0.00, 'Free', 0, 'An open-world action RPG set in the fantasy world of Teyvat. Players explore vast regions, solve puzzles, fight enemies using elemental combat systems, and unlock new characters through a gacha-based progression system.', '2020-09-28', 'https://fastcdn.hoyoverse.com/content-v2/plat/124031/5d2ba4371115d26de4c574b28311aed8_3908500551050520494.jpeg', '["https://media.wired.com/photos/5f74d2f4df8a35780989d792/3:2/w_2560%2Cc_limit/Genshin%2520Impact%2520_Keyart.png"]');
+('Genshin Impact', 0.00, 'Free', 0, 'An open-world action RPG set in the fantasy world of Teyvat. Players explore vast regions, solve puzzles, fight enemies using elemental combat systems, and unlock new characters through a gacha-based progression system.', '2020-09-28', '/images/games/GenshinImpact/front.jpg', '["https://media.wired.com/photos/5f74d2f4df8a35780989d792/3:2/w_2560%2Cc_limit/Genshin%2520Impact%2520_Keyart.png"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Wuthering Waves', 0.00, 'Free', 0, 'A post-apocalyptic open-world action RPG focused on fast-paced combat and exploration. Players uncover mysteries of a devastated world, battle enemies using combo-based mechanics, and collect characters with unique skills.', '2024-05-22', 'https://gaming-cdn.com/images/products/18945/orig/wuthering-waves-pc-spiel-steam-cover.jpg?v=1749478082', '["https://cdn.oneesports.co.th/cdn-data/sites/3/2024/05/Wuthering-Waves.jpg"]');
+('Wuthering Waves', 0.00, 'Free', 0, 'A post-apocalyptic open-world action RPG focused on fast-paced combat and exploration. Players uncover mysteries of a devastated world, battle enemies using combo-based mechanics, and collect characters with unique skills.', '2024-05-22', '/images/games/WutheringWaves/front.jpg', '["https://cdn.oneesports.co.th/cdn-data/sites/3/2024/05/Wuthering-Waves.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Among Us', 110.00, 'Sale', 50, 'A multiplayer social deduction game where players work together to complete tasks on a spaceship while secretly identifying impostors. The game emphasizes communication, deception, and teamwork in short match sessions.', '2018-06-15', 'https://cdn.aptoide.com/imgs/d/4/6/d460a63e167a534bc7b9e4f1eaeed7dc_fgraphic.png', '["https://img.4gamers.com.tw/ckfinder-th/image2/auto/2024-03/Among-Us-240329-003453.png","https://static0.thegamerimages.com/wordpress/wp-content/uploads/2023/11/among-us-impostor.jpg"]');
+('Among Us', 110.00, 'Sale', 50, 'A multiplayer social deduction game where players work together to complete tasks on a spaceship while secretly identifying impostors. The game emphasizes communication, deception, and teamwork in short match sessions.', '2018-06-15', '/images/games/AmongUs/front.jpg', '["https://img.4gamers.com.tw/ckfinder-th/image2/auto/2024-03/Among-Us-240329-003453.png","https://static0.thegamerimages.com/wordpress/wp-content/uploads/2023/11/among-us-impostor.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Valorant', 0.00, 'Free', 0, 'A competitive 5v5 tactical first-person shooter combining precise gunplay with unique character abilities. Players choose agents with distinct skills and compete in strategic, team-based matches.', '2020-06-02', 'https://cdn1.epicgames.com/offer/cbd5b3d310a54b12bf3fe8c41994174f/EGS_VALORANT_RiotGames_S1_2560x1440-e1dab02ef10e4470a609affcfb8f1a1a', NULL);
+('Valorant', 0.00, 'Free', 0, 'A competitive 5v5 tactical first-person shooter combining precise gunplay with unique character abilities. Players choose agents with distinct skills and compete in strategic, team-based matches.', '2020-06-02', '/images/games/Valorant/front.jpg', '["/images/games/Valorant/detail_1.jpg","/images/games/Valorant/detail_2.jpg","/images/games/Valorant/detail_3.jpg","/images/games/Valorant/detail_4.jpg","/images/games/Valorant/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Roblox', 0.00, 'Free', 0, 'An online platform that allows users to create, share, and play millions of user-generated games. Roblox supports a wide range of genres and social interactions through community-created experiences.', '2006-09-01', 'https://images.rbxcdn.com/28ab48fcd5d5b19b03c126d2b6aef4b8.jpg', NULL);
+('Roblox', 0.00, 'Free', 0, 'An online platform that allows users to create, share, and play millions of user-generated games. Roblox supports a wide range of genres and social interactions through community-created experiences.', '2006-09-01', '/images/games/Roblox/front.jpg', '["/images/games/Roblox/detail_1.jpg","/images/games/Roblox/detail_2.jpg","/images/games/Roblox/detail_3.jpg","/images/games/Roblox/detail_4.jpg","/images/games/Roblox/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Resident Evil Requiem', 1890.00, 'Regular', 0, 'The next survival horror entry in the long-running Resident Evil series. Play as FBI analyst Grace Ashcroft facing the horrors of a ruined Raccoon City, combining survival-focused exploration, puzzles, tense combat, and cinematic storytelling.', '2026-02-27', 'https://image.api.playstation.com/vulcan/ap/rnd/202512/1205/74bb57eb10447ae35775f625271f202360bae45cb3572da5.jpg', NULL);
+('Resident Evil Requiem', 1890.00, 'Regular', 0, 'The next survival horror entry in the long-running Resident Evil series. Play as FBI analyst Grace Ashcroft facing the horrors of a ruined Raccoon City, combining survival-focused exploration, puzzles, tense combat, and cinematic storytelling.', '2026-02-27', '/images/games/ResidentEvilRequiem/front.png', '["/images/games/ResidentEvilRequiem/detail_1.jpg","/images/games/ResidentEvilRequiem/detail_2.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Cyberpunk 2077', 1799.00, 'Sale', 55, 'Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.', '2020-12-10', 'https://cdn1.epicgames.com/offer/77f2b98e2cef40c8a7437518bf420e47/EGS_Cyberpunk2077_CDPROJEKTRED_S1_03_2560x1440-359e77d3cd0a40aebf3bbc130d14c5c7', NULL);
+('Cyberpunk 2077', 1799.00, 'Sale', 55, 'Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.', '2020-12-10', '/images/games/Cyberpunk2077/front.jpg', '["/images/games/Cyberpunk2077/detail_1.jpg","/images/games/Cyberpunk2077/detail_2.jpg","/images/games/Cyberpunk2077/detail_3.jpg","/images/games/Cyberpunk2077/detail_4.jpg","/images/games/Cyberpunk2077/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Monster Hunter Wilds', 2390.00, 'Sale', 11, 'A major installment in the Monster Hunter series where players explore vast biomes, take down massive monsters with a team, and craft gear from harvested parts.', '2025-02-28', 'https://image.api.playstation.com/vulcan/ap/rnd/202409/0506/aa5c40ba185302dfcc88edc276a876fdc6c516c4db07ec9d.png', NULL);
+('Monster Hunter Wilds', 2390.00, 'Sale', 11, 'A major installment in the Monster Hunter series where players explore vast biomes, take down massive monsters with a team, and craft gear from harvested parts.', '2025-02-28', '/images/games/MonsterHunterWilds/front.jpg', '["/images/games/MonsterHunterWilds/detail_1.jpg","/images/games/MonsterHunterWilds/detail_2.jpg","/images/games/MonsterHunterWilds/detail_3.jpg","/images/games/MonsterHunterWilds/detail_4.jpg","/images/games/MonsterHunterWilds/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Assassin''s Creed Shadows', 1990.00, 'Regular', 0, 'A blockbuster entry in the Assassin''s Creed franchise featuring stealth, parkour, and historical open-world exploration with a rich narrative.', '2025-03-20', 'https://cdn1.epicgames.com/offer/14a28903e3d14bd5aa3e6dbf10868126/EN_EGST_StoreLandscape_2560x1440_2560x1440-35f77ef342bb2d3a3efac25f4fa4d4e0', NULL);
+('Assassin''s Creed Shadows', 1990.00, 'Regular', 0, 'A blockbuster entry in the Assassin''s Creed franchise featuring stealth, parkour, and historical open-world exploration with a rich narrative.', '2025-03-20', '/images/games/Assassin_sCreedShadows/front.jpg', '["/images/games/Assassin_sCreedShadows/detail_1.jpg","/images/games/Assassin_sCreedShadows/detail_2.jpg","/images/games/Assassin_sCreedShadows/detail_3.jpg","/images/games/Assassin_sCreedShadows/detail_4.jpg","/images/games/Assassin_sCreedShadows/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Final Fantasy VII Rebirth', 1990.00, 'Sale', 17, 'The acclaimed sequel in the Final Fantasy VII remake trilogy, combining real-time action and deep RPG mechanics, released on PC after its console debut.', '2025-01-23', 'https://cdn1.epicgames.com/offer/e9a679451d094c1ba3d008b6a01adec5/EGS_FINALFANTASYVIIREBIRTH_SquareEnix_S1_2560x1440-e254f978084058f898118dc49728d04c', NULL);
+('Final Fantasy VII Rebirth', 1990.00, 'Sale', 17, 'The acclaimed sequel in the Final Fantasy VII remake trilogy, combining real-time action and deep RPG mechanics, released on PC after its console debut.', '2025-01-23', '/images/games/FinalFantasyVIIRebirth/front.jpg', '["/images/games/FinalFantasyVIIRebirth/detail_1.jpg","/images/games/FinalFantasyVIIRebirth/detail_2.jpg","/images/games/FinalFantasyVIIRebirth/detail_3.jpg","/images/games/FinalFantasyVIIRebirth/detail_4.jpg","/images/games/FinalFantasyVIIRebirth/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Death Stranding 2: On the Beach', 2390.00, 'Regular', 0, 'A story-rich open-world action adventure where you reconnect a fractured world using strategic traversal and cinematic gameplay.', '2026-03-19', 'https://www.kojimaproductions.jp/sites/default/files/2025-12/wellcome_ds2_pc_0.jpg', NULL);
+('Death Stranding 2: On the Beach', 2390.00, 'Regular', 0, 'A story-rich open-world action adventure where you reconnect a fractured world using strategic traversal and cinematic gameplay.', '2026-03-19', '/images/games/DeathStranding2_OntheBeach/front.jpg', '["/images/games/DeathStranding2_OntheBeach/detail_1.jpg","/images/games/DeathStranding2_OntheBeach/detail_2.jpg","/images/games/DeathStranding2_OntheBeach/detail_3.jpg","/images/games/DeathStranding2_OntheBeach/detail_4.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Mewgenics', 990.00, 'Regular', 0, 'A quirky indie hit featuring strategic roguelike mechanics where players breed and evolve mutant cats with unique traits to battle enemies.', '2026-02-10', 'https://frvr.com/wp-content/uploads/2026/02/mewgenics-release-date-and-times.jpg', NULL);
+('Mewgenics', 990.00, 'Regular', 0, 'A quirky indie hit featuring strategic roguelike mechanics where players breed and evolve mutant cats with unique traits to battle enemies.', '2026-02-10', '/images/games/Mewgenics/front.png', '["/images/games/Mewgenics/detail_1.jpg","/images/games/Mewgenics/detail_2.jpg","/images/games/Mewgenics/detail_3.jpg","/images/games/Mewgenics/detail_4.jpg","/images/games/Mewgenics/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('The Last of Us Part I', 1690.00, 'Sale', 50, 'Discover the award-winning game that inspired the critically acclaimed television show. Guide Joel and Ellie through a post-apocalyptic America, and encounter unforgettable allies and enemies.', '2023-03-28', 'https://cdn1.epicgames.com/offer/0c40923dd1174a768f732a3b013dcff2/EGS_TheLastofUsPartI_NaughtyDogLLC_S1_2560x1440-3659b5fe340f8fc073257975b20b7f84', NULL);
+('The Last of Us Part I', 1690.00, 'Sale', 50, 'Discover the award-winning game that inspired the critically acclaimed television show. Guide Joel and Ellie through a post-apocalyptic America, and encounter unforgettable allies and enemies.', '2023-03-28', '/images/games/The Last of Us™ Part I/front.jpg', '["/images/games/The Last of Us™ Part I/detail_1.jpg","/images/games/The Last of Us™ Part I/detail_2.jpg","/images/games/The Last of Us™ Part I/detail_3.jpg","/images/games/The Last of Us™ Part I/detail_4.jpg","/images/games/The Last of Us™ Part I/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('EA SPORTS FC 26', 1999.00, 'Regular', 0, 'The Club is Yours in EA SPORTS FC 26. Play your way with an overhauled gameplay experience powered by community feedback, Manager Live Challenges that bring fresh storylines to the new season.', '2025-09-26', 'https://cdn1.epicgames.com/offer/1d4d85b1051e41ee8f1a099e99d59f3f/EGS_EASPORTSFC26StandardEdition_EACANADA_S1_2560x1440-efabe29766334696db018632ea5ba492', NULL);
+('EA SPORTS FC 26', 1999.00, 'Regular', 0, 'The Club is Yours in EA SPORTS FC 26. Play your way with an overhauled gameplay experience powered by community feedback, Manager Live Challenges that bring fresh storylines to the new season.', '2025-09-26', '/images/games/EA SPORTS FC™ 26/front.jpg', '["/images/games/EA SPORTS FC™ 26/detail_1.jpg","/images/games/EA SPORTS FC™ 26/detail_2.jpg","/images/games/EA SPORTS FC™ 26/detail_3.jpg","/images/games/EA SPORTS FC™ 26/detail_4.jpg","/images/games/EA SPORTS FC™ 26/detail_5.jpg","/images/games/EA SPORTS FC™ 26/detail_6.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('F1 25', 1599.00, 'Sale', 60, 'Leave your mark on the world of racing in F1 25, the official video game of the 2025 FIA Formula One World Championship, featuring a revamped My Team mode and the thrilling third chapter of Braking Point.', '2025-05-30', 'https://image.api.playstation.com/vulcan/ap/rnd/202505/1521/ca36c3ae7641a273ff3f00e63732fb76e2850c57f577d6eb.jpg', NULL);
+('F1 25', 1599.00, 'Sale', 60, 'Leave your mark on the world of racing in F1 25, the official video game of the 2025 FIA Formula One World Championship, featuring a revamped My Team mode and the thrilling third chapter of Braking Point.', '2025-05-30', '/images/games/F1® 25/front.jpg', '["/images/games/F1® 25/detail_1.jpg","/images/games/F1® 25/detail_2.jpg","/images/games/F1® 25/detail_3.jpg","/images/games/F1® 25/detail_4.jpg","/images/games/F1® 25/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('REMATCH', 590.00, 'Regular', 0, 'Rematch is an online multiplayer football game. Control one player and compete with your team in fast-paced 5v5 matches from an immersive third-person perspective.', '2025-06-19', 'https://media.online-station.net/images/2025/06/0b52bc5e524a1fc830f95eb1e98955e5.jpg', NULL);
+('REMATCH', 590.00, 'Regular', 0, 'Rematch is an online multiplayer football game. Control one player and compete with your team in fast-paced 5v5 matches from an immersive third-person perspective.', '2025-06-19', '/images/games/REMATCH/front.jpg', '["/images/games/REMATCH/detail_1.jpg","/images/games/REMATCH/detail_2.jpg","/images/games/REMATCH/detail_3.jpg","/images/games/REMATCH/detail_4.jpg","/images/games/REMATCH/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Hollow Knight: Silksong', 400.00, 'Regular', 0, 'Discover a vast, haunted kingdom in Hollow Knight: Silksong! Explore, fight and survive as you ascend to the peak of a land ruled by silk and song.', '2025-09-04', 'https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/store/software/switch2/70010000105851/8787627be7f26ae7984456ffd9af17bea845032cebbf59fe6eeb596dea6bb20e', NULL);
+('Hollow Knight: Silksong', 400.00, 'Regular', 0, 'Discover a vast, haunted kingdom in Hollow Knight: Silksong! Explore, fight and survive as you ascend to the peak of a land ruled by silk and song.', '2025-09-04', '/images/games/Hollow Knight_ Silksong/front.jpg', '["/images/games/Hollow Knight_ Silksong/detail_1.jpg","/images/games/Hollow Knight_ Silksong/detail_2.jpg","/images/games/Hollow Knight_ Silksong/detail_3.jpg","/images/games/Hollow Knight_ Silksong/detail_4.jpg","/images/games/Hollow Knight_ Silksong/detail_5.jpg"]');
 
 INSERT INTO Game (Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
-('Resident Evil 4', 1090.00, 'Regular', 0, 'Survival is just the beginning. Six years have passed since the biological disaster in Raccoon City. Leon S. Kennedy, one of the survivors, tracks the president''s kidnapped daughter to a secluded European village.', '2023-03-24', 'https://thethaiger.com/th/wp-content/uploads/2023/03/Resident-Evil-4-Remake.jpg', NULL);
+('Resident Evil 4', 1090.00, 'Regular', 0, 'Survival is just the beginning. Six years have passed since the biological disaster in Raccoon City. Leon S. Kennedy, one of the survivors, tracks the president''s kidnapped daughter to a secluded European village.', '2023-03-24', '/images/games/Resident Evil 4/front.jpg', '["/images/games/Resident Evil 4/detail_1.jpg","/images/games/Resident Evil 4/detail_2.jpg","/images/games/Resident Evil 4/detail_3.jpg","/images/games/Resident Evil 4/detail_4.jpg"]');
 
 -- GameGenre mappings (Game ID -> Genre ID)
 -- Game 1: Honkai: Star Rail -> RPG(1), Turn-Based(2), Sci-Fi(3)
@@ -267,3 +267,141 @@ INSERT INTO User (Username, Email, Password, FirstName, LastName) VALUES
 ('alex_gamer', 'alex@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Alex', 'Wong'),
 ('player_one', 'player1@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Sam', 'Lee'),
 ('pro_gamer', 'pro@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Chris', 'Park');
+
+-- ============================================
+-- Additional Games (from GAME.csv)
+-- ============================================
+INSERT IGNORE INTO Genre (Name) VALUES ('Fantasy');
+
+INSERT IGNORE INTO Game (GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
+(20, 'Elden Ring', 1790.00, 'Sale', 30, 'Explore a massive fantasy world with challenging combat, dangerous bosses, and hidden secrets.', '2022-02-25',
+ '/images/games/Elden Ring/front.jpg',
+ '["/images/games/Elden Ring/detail_1.jpg","/images/games/Elden Ring/detail_2.jpg","/images/games/Elden Ring/detail_3.jpg","/images/games/Elden Ring/detail_4.jpg"]');
+
+INSERT IGNORE INTO Game (GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
+(21, 'Red Dead Redemption 2', 1599.00, 'Sale', 30, 'Story-driven western adventure with realistic open-world exploration, missions, and memorable characters.', '2018-10-26',
+ '/images/games/Red Dead Redemption 2/front.jpg',
+ '["/images/games/Red Dead Redemption 2/detail_1.jpg","/images/games/Red Dead Redemption 2/detail_2.jpg","/images/games/Red Dead Redemption 2/detail_3.jpg","/images/games/Red Dead Redemption 2/detail_4.jpg"]');
+
+INSERT IGNORE INTO Game (GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
+(22, 'Baldur''s Gate 3', 1799.00, 'Regular', 0, 'Party-based RPG where your choices shape the story and battles use tactical turn-based combat.', '2023-08-03',
+ '/images/games/Baldur_s Gate 3/front.jpg',
+ '["/images/games/Baldur_s Gate 3/detail_1.jpg","/images/games/Baldur_s Gate 3/detail_2.jpg","/images/games/Baldur_s Gate 3/detail_3.jpg","/images/games/Baldur_s Gate 3/detail_4.jpg"]');
+
+INSERT IGNORE INTO Game (GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
+(23, 'Stardew Valley', 315.00, 'Regular', 0, 'Build a farm, grow crops, explore caves, fish, and make friends in a peaceful town.', '2016-02-26',
+ '/images/games/Stardew Valley/front.jpg',
+ '["/images/games/Stardew Valley/detail_1.jpg","/images/games/Stardew Valley/detail_2.jpg","/images/games/Stardew Valley/detail_3.jpg","/images/games/Stardew Valley/detail_4.jpg"]');
+
+INSERT IGNORE INTO Game (GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages) VALUES
+(24, 'Terraria', 220.00, 'Regular', 0, 'Dig, build, craft, and fight powerful bosses in a huge 2D sandbox world.', '2011-05-16',
+ '/images/games/Terraria/front.jpg',
+ '["/images/games/Terraria/detail_1.jpg","/images/games/Terraria/detail_2.jpg","/images/games/Terraria/detail_3.jpg","/images/games/Terraria/detail_4.jpg"]');
+
+-- GameGenre for new games
+-- Game 20: Elden Ring -> Action RPG(15), Open World(4), Fantasy(28)
+INSERT IGNORE INTO GameGenre (GameID, GenreID) VALUES (20,15),(20,4),(20,28);
+-- Game 21: Red Dead Redemption 2 -> Action(5), Open World(4), Adventure(17)
+INSERT IGNORE INTO GameGenre (GameID, GenreID) VALUES (21,5),(21,4),(21,17);
+-- Game 22: Baldur's Gate 3 -> RPG(1), Strategy(20), Turn-Based(2)
+INSERT IGNORE INTO GameGenre (GameID, GenreID) VALUES (22,1),(22,20),(22,2);
+-- Game 23: Stardew Valley -> Simulation(12), RPG(1), Indie(21)
+INSERT IGNORE INTO GameGenre (GameID, GenreID) VALUES (23,12),(23,1),(23,21);
+-- Game 24: Terraria -> Sandbox(11), Survival(22), Adventure(17)
+INSERT IGNORE INTO GameGenre (GameID, GenreID) VALUES (24,11),(24,22),(24,17);
+
+-- AdminAddGame for new games
+INSERT IGNORE INTO AdminAddGame (AdminID, GameID) VALUES
+(1,20),(1,21),(1,22),(1,23),(1,24);
+
+-- Additional seed data (10+ records per table)
+USE game_store;
+
+-- Add 7 more Administrators (total -> 10)
+INSERT IGNORE INTO Administrator (AdminID, FirstName, LastName, Age, Address, Email) VALUES
+(4,  'Lisa',    'Park',       26, '321 Dev Lane, Bangkok',      'lisa@gamehub.com'),
+(5,  'Tom',     'Wilson',     32, '654 Code St, Pattaya',       'tom@gamehub.com'),
+(6,  'Emma',    'Davis',      29, '987 Script Ave, Chiang Rai', 'emma@gamehub.com'),
+(7,  'James',   'Kim',        31, '111 Api Blvd, Hat Yai',      'james@gamehub.com'),
+(8,  'Sophia',  'Lee',        27, '222 Query Rd, Nonthaburi',   'sophia@gamehub.com'),
+(9,  'Oliver',  'Brown',      34, '333 Index Way, Samut Prakan','oliver@gamehub.com'),
+(10, 'Isabella','Garcia',     25, '444 Cache St, Rayong',       'isabella@gamehub.com');
+
+-- Add 7 more AdminLogins (same password hash: admin123)
+INSERT IGNORE INTO AdminLogin (AdminID, Username, Password, Role, LastLoginLog) VALUES
+(4,  'lisa',     '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
+(5,  'tom',      '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
+(6,  'emma',     '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
+(7,  'james',    '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Manager',   NOW()),
+(8,  'sophia',   '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Moderator', NOW()),
+(9,  'oliver',   '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Moderator', NOW()),
+(10, 'isabella', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Moderator', NOW());
+
+-- Add 5 more Users (total -> 10)
+INSERT IGNORE INTO User (Username, Email, Password, FirstName, LastName) VALUES
+('gamer_thai',   'thai@email.com',   '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Somsak',  'Jaidee'),
+('rpg_lover',    'rpg@email.com',    '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Wanida',  'Sukjai'),
+('fps_king',     'fps@email.com',    '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Arjun',   'Patel'),
+('indie_fan',    'indie@email.com',  '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Napat',   'Wongkham'),
+('casual_play',  'casual@email.com', '$2a$10$9Hms4xbPnYKBTdqHIfNB/OsrwRQF1KwLCLVr07DVlBst398uCZip.', 'Pranee',  'Chaichan');
+
+-- Add 9 more Wishlist entries (total -> 10)
+INSERT IGNORE INTO Wishlist (GameID, SessionID) VALUES
+(2,  'sess-demo-0001'),
+(3,  'sess-demo-0001'),
+(5,  'sess-demo-0002'),
+(8,  'sess-demo-0002'),
+(11, 'sess-demo-0003'),
+(12, 'sess-demo-0003'),
+(20, 'sess-demo-0004'),
+(22, 'sess-demo-0004'),
+(24, 'sess-demo-0005');
+
+-- Add 8 more Cart entries (total -> 10)
+INSERT IGNORE INTO Cart (GameID, SessionID, Quantity) VALUES
+(1,  'sess-demo-0001', 1),
+(4,  'sess-demo-0001', 1),
+(6,  'sess-demo-0002', 1),
+(9,  'sess-demo-0002', 1),
+(13, 'sess-demo-0003', 1),
+(16, 'sess-demo-0003', 1),
+(21, 'sess-demo-0004', 1),
+(23, 'sess-demo-0005', 1);
+
+-- Additional reviews for new games
+USE game_store;
+
+INSERT INTO Review (GameID, ReviewerName, Rating, Comment) VALUES
+-- Wuthering Waves
+(3,  'WaveRider2',    5, 'The combat system is incredibly satisfying. Fast-paced and fluid.'),
+(3,  'OpenWorldFan',  4, 'Beautiful world to explore. Story takes a while to pick up but worth it.'),
+-- Among Us
+(4,  'ImpostorPro',   5, 'Never gets old! The social deduction is pure genius.'),
+-- Valorant
+(5,  'AgentMain',     4, 'Great agent variety and map design. Ranked is addictive.'),
+(5,  'CompPlayer',    5, 'Best competitive shooter out there. Tight gunplay and skill ceiling is high.'),
+-- Roblox
+(6,  'BlockBuilder',  4, 'So much creativity here. You can find a game for any mood.'),
+-- Cyberpunk 2077
+(8,  'V_Player',      5, 'The Phantom Liberty DLC elevated this game to a 10/10 experience.'),
+-- Death Stranding 2
+(12, 'KojimaFan',     5, 'Another masterpiece. The story is deeply emotional and the traversal is meditative.'),
+-- Mewgenics
+(13, 'CatLover',      5, 'The most unique roguelike I have played. Cat breeding mechanics are wild.'),
+-- Elden Ring (new)
+(20, 'TarnishedOne',  5, 'A landmark in open-world design. Every corner hides a secret.'),
+(20, 'SoulsFan',      4, 'Brutal but fair. The satisfaction of beating a boss is unmatched.'),
+(20, 'CasualTried',   3, 'Very challenging for newcomers but the world is gorgeous.'),
+-- Red Dead Redemption 2 (new)
+(21, 'CowboyArthur',  5, 'The most immersive open world ever created. Arthur Morgan is unforgettable.'),
+(21, 'WesternLover',  5, 'A cinematic masterpiece. The story had me emotional multiple times.'),
+-- Baldur Gate 3 (new)
+(22, 'DnDMaster',     5, 'Best RPG of the decade. The depth of choices and consequences is staggering.'),
+(22, 'Tav_Player',    5, 'Every playthrough feels completely different. Incredible replayability.'),
+(22, 'CasualRPG',     4, 'Long but never boring. Combat takes time to learn but is rewarding.'),
+-- Stardew Valley (new)
+(23, 'FarmLife',      5, 'The most relaxing and satisfying game. Perfect stress relief.'),
+(23, 'JRPGFan',       4, 'Surprisingly deep. I spent 200 hours and still discovering new things.'),
+-- Terraria (new)
+(24, 'DiamondPickaxe',5, 'So much content for the price. The boss progression is fantastic.'),
+(24, 'BuilderPro',    4, 'More content than most full-price games. A timeless classic.');

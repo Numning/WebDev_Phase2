@@ -1,4 +1,4 @@
-﻿/**
+/**
  * detail.js —Game Detail Page Logic
  * 
  * Displays comprehensive information about a single game including:
@@ -158,7 +158,7 @@ async function loadGameDetail(id) {
 
         // ── Build Detail Page HTML ──
         container.innerHTML = `
-            <a href="/games" class="back-to-search" id="back-to-search"><i class="icon-arrow-left"></i> EBack to Search Results</a>
+            <a href="/games" class="back-to-search" id="back-to-search"><i class="icon-arrow-left"></i> Back to Search Results</a>
 
             <div class="detail-hero">
                 <div class="detail-slider" id="detail-slider"></div>
@@ -205,7 +205,7 @@ async function loadGameDetail(id) {
                     <div class="rating-stars">${starsHtml} <span style="color:var(--text-primary);font-size:1.2rem;font-weight:700;">${avgRating}</span> <span style="color:var(--text-muted);font-size:0.85rem;">(${totalReviews.toLocaleString()} reviews)</span></div>
                     ${distribution.map((pct, i) => `
                         <div class="rating-bar-container">
-                            <span style="min-width:40px;">${5 - i} <i class="icon-star-filled"></i>/span>
+                            <span style="min-width:40px;">${5 - i} <i class="icon-star-filled"></i></span>
                             <div class="rating-bar"><div class="rating-bar-fill" style="width:${pct}%;"></div></div>
                             <span style="min-width:35px;text-align:right;">${pct}%</span>
                         </div>
@@ -443,23 +443,29 @@ function setupNavSearch() {
  */
 async function addToCart(gameId) {
     const sessionId = localStorage.getItem('sessionId');
+    const btn = document.querySelector('.btn-success');
     try {
         const res = await fetch(`${API_BASE}/cart`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ gameId, sessionId })
         });
+        const data = await res.json();
         if (res.ok) {
             updateCartBadge();
-            // Show brief success feedback
-            const btn = event.target;
-            const originalText = btn.textContent;
-            btn.textContent = '<i class="icon-x"></i>Added!';
-            btn.disabled = true;
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }, 1500);
+            // If already in cart, show different message
+            const alreadyInCart = data.message === 'Already in cart';
+            if (btn) {
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = alreadyInCart
+                    ? '<i class="icon-check-circle"></i> Already in Cart'
+                    : '<i class="icon-check-circle"></i> Added!';
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.disabled = false;
+                }, 1500);
+            }
         }
     } catch (err) {
         console.error('Error adding to cart:', err);

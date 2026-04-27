@@ -63,12 +63,12 @@ The system supports two main user groups:
 ### General Users
 - Access the home page with a featured game banner, carousels (Games on Sale, New Releases, Free Games, Most Popular), and a news section powered by FreeToGame API
 - Search for games using multiple filter criteria (title, genre, price range, pricing type)
-- View detailed game information including image gallery, description, system requirements, and user ratings/reviews
+- View detailed game information including a **local image gallery slider**, description, system requirements, and user ratings/reviews
 - Submit reviews and ratings for games
-- Add games to a session-based shopping cart with quantity management
+- Add games to a session-based shopping cart (**maximum 1 copy per game per session**)
 - Save games to a session-based wishlist and move them to cart
 - Register a customer account and log in
-- Access team member information with social links
+- Access team member information with real profile photos and social links
 
 ### Administrators
 - Log in using the administrator login page
@@ -142,10 +142,10 @@ Figure 1. Navigation Diagram of the Web Application
 ## 2.2 Navigation Explanation
 
 - The **Home Page** (/home) acts as the main entry point. It features a featured game banner, four carousel sections (Games on Sale, New Releases, Free Games, Most Popular), and a news section showing latest free-to-play game releases from FreeToGame API. A left sidebar provides genre-based navigation links.
-- All pages share a consistent **navigation bar** with links to: Home, Games, Team, Wishlist (♡), Cart (🛒 with badge count), Account (👤), and Admin.
+- All pages share a consistent **navigation bar** with links to: Home, Games, Team, Wishlist, Cart (with badge count), Account, and Admin (SVG icon-based, no emojis).
 - From the **Browse Games** page (/games), users can apply multiple filters (title, genre, price range) and click on any game card to navigate to its **Detail Page** (/game?id=X).
-- The **Detail Page** displays full game information with an image gallery slider, tabbed content (Description, System Requirements, User Ratings), a review submission form, and wishlist/cart buttons.
-- The **Cart Page** (/cart) shows cart items with quantity controls, pricing calculations (subtotal, discount, total), and checkout/clear buttons.
+- The **Detail Page** displays full game information with a **local image gallery slider** (front.jpg + detail_N.jpg), tabbed content (Description, System Requirements, User Ratings with star distribution), a review submission form, and wishlist/cart buttons.
+- The **Cart Page** (/cart) shows cart items (1 copy per game), pricing calculations (subtotal, discount, total), and checkout/clear buttons.
 - The **Wishlist Page** (/wishlist) shows saved games with options to remove or move to cart.
 - Users can access the **User Account** page (/account) from the navigation bar, which provides tabbed Sign In and Create Account forms.
 - Administrators access the **Admin Login** (/admin/login) page, and upon successful authentication are redirected to the **Admin Dashboard** (/admin), which features a data table with edit/delete actions and a modal form for adding/editing games.
@@ -158,7 +158,7 @@ Figure 1. Navigation Diagram of the Web Application
 
 ## 3.1 Front-end Overview
 
-The front-end was implemented using HTML5, CSS3, and JavaScript. It is hosted on a separate Express server (port 5500) with clean URL routing. All pages include a navigation bar and footer, use semantic HTML elements, and connect to the back-end API at http://localhost:3000/api. The front-end source is located in the `sec2_gr12_fe_src/` directory and consists of 9 HTML pages, 1 CSS file (css/style.css), and 9 JavaScript files in the js/ directory.
+The front-end was implemented using HTML5, CSS3, and JavaScript. It is hosted on a separate Express server (port 5500) with clean URL routing. All pages include a navigation bar and footer, use semantic HTML elements, and connect to the back-end API at http://localhost:3000/api. Navigation icons use a **CSS mask-image SVG icon system** (no emoji, no external icon libraries). The front-end source is located in the `sec2_gr12_fe_src/` directory and consists of 9 HTML pages, 1 CSS file (css/style.css), 9 JavaScript files in the js/ directory, and a local `images/` folder containing game covers, gallery screenshots, and team profile photos.
 
 ## 3.2 Home Page
 
@@ -236,7 +236,7 @@ The Detail Page (detail.html, served at /game?id=X) displays comprehensive infor
 - "Back to Search Results" navigation link
 
 ### Code Explanation
-js/detail.js extracts the game ID from URL, then makes parallel API calls to `/api/games/:id`, `/api/reviews/:id`, and `/api/reviews/stats/:id`. It also checks wishlist status via `/api/wishlist/check/:sessionId/:gameId`. The image gallery uses a slider with `updateSlider()` function for navigation. Tab switching is handled by `setupTabs()`. Review submission sends POST to `/api/reviews`. Wishlist toggle sends POST or DELETE to `/api/wishlist`.
+js/detail.js extracts the game ID from URL, then makes parallel API calls to `/api/games/:id`, `/api/reviews/:id`, and `/api/reviews/stats/:id`. It also checks wishlist status via `/api/wishlist/check/:sessionId/:gameId`. The image gallery uses local images: the main image (`front.jpg`) plus detail screenshots (`detail_1.jpg`, `detail_2.jpg`, etc.) stored in `images/games/<GameFolder>/`. Tab switching is handled by `setupTabs()`. Review submission sends POST to `/api/reviews`. Wishlist toggle sends POST or DELETE to `/api/wishlist`. The Add to Cart button enforces **1-per-game**: if the game is already in the cart, the button shows "Already in Cart" feedback without adding a duplicate.
 
 ## 3.6 Product/Service Management Page (Admin Dashboard)
 
@@ -258,11 +258,12 @@ js/admin.js checks authentication on load, then fetches all games via `GET /api/
 ## 3.7 Team Page
 
 ### Purpose
-The Team Page (team.html, served at /team) presents the four team members with avatar images, student IDs, roles, and social links.
+The Team Page (team.html, served at /team) presents the four team members with real profile photo images, student IDs, roles, and social links.
 
 ### Implemented Features
 - Four team member cards in a responsive grid layout
-- Each card includes: avatar image (from DiceBear API), full name, student ID, role title, and a GitHub social link
+- Each card includes: **real profile photo** (served locally from `/images/team/<studentId>.jpg`), full name, student ID, role title, and a GitHub social link with SVG icon
+- Avatar image is centered using `display: block; margin: 0 auto` and styled with a circular border and pink glow shadow
 - Consistent navigation bar and footer
 
 ### Team Members Displayed
@@ -277,7 +278,7 @@ The Team Page (team.html, served at /team) presents the four team members with a
 ## 3.8 Additional Pages
 
 ### 3.8.1 Shopping Cart Page (cart.html)
-Implements a session-based shopping cart. Displays cart items with images, titles, prices (handling sale/free logic), quantity inputs, and remove buttons. Shows an Order Summary sidebar with subtotal, discount, and total calculations. Includes "Proceed to Checkout" and "Clear Cart" buttons. JavaScript (js/cart.js) manages the cart via API calls to GET/POST/PUT/DELETE `/api/cart/...`.
+Implements a session-based shopping cart with a **1-copy-per-game** enforcement rule. Displays cart items with images, titles, prices (handling sale/free logic), and remove buttons. Shows an Order Summary sidebar with subtotal, discount, and total calculations. Includes "Proceed to Checkout" and "Clear Cart" buttons. JavaScript (js/cart.js) manages the cart via API calls to GET/DELETE `/api/cart/...`. Adding a duplicate game returns `{ message: 'Already in cart' }` from the backend without inserting a duplicate record.
 
 ### 3.8.2 Wishlist Page (wishlist.html)
 Displays saved games in a card grid with remove buttons and "Add to Cart" buttons. JavaScript (js/wishlist.js) fetches wishlisted games via GET `/api/wishlist/:sessionId` and supports removing (DELETE) and moving items to cart (POST `/api/cart`).
@@ -298,16 +299,18 @@ A tab-based authentication page with "Sign In" and "Create Account" tabs. The lo
 
 ## 3.10 CSS Implementation
 
-The project uses one external CSS file: **css/style.css** (~64KB, ~1800+ lines).
+The project uses one external CSS file: **css/style.css** (~77KB, ~3200+ lines).
 
 The CSS design uses:
 - **CSS Custom Properties** (variables) for theming: `--bg-primary`, `--bg-secondary`, `--text-primary`, `--accent-primary`, `--border-color`, etc.
 - **Dark theme** design with consistent color palette throughout
+- **SVG icon system** via `mask-image` CSS property — all UI icons (gamepad, search, cart, heart, user, star, etc.) are defined as inline data-URI SVGs and inherit text color via `background-color: currentColor`
 - **Element selectors**: body, header, nav, main, footer, h1–h3, p, a, input, button, table
-- **Class selectors**: `.navbar`, `.logo`, `.nav-links`, `.carousel-card`, `.card`, `.card-body`, `.card-title`, `.card-price`, `.sale-badge`, `.btn`, `.btn-primary`, `.form-control`, `.modal`, `.data-table`, `.team-card`, `.footer`, `.auth-card`
+- **Class selectors**: `.navbar`, `.logo`, `.nav-links`, `.carousel-card`, `.card`, `.card-body`, `.card-title`, `.card-price`, `.sale-badge`, `.btn`, `.btn-primary`, `.form-control`, `.modal`, `.data-table`, `.team-card`, `.footer`, `.auth-card`, `.icon-*` (SVG icon classes)
 - **ID selectors**: `#featured-banner`, `#sale-track`, `#new-track`, `#results-grid`, `#cart-items`, `#game-modal`, `#login-form`
 - **Responsive layout** using CSS Grid and Flexbox
 - **Smooth transitions** and hover effects on cards, buttons, and navigation elements
+- **Standard `line-clamp`** property alongside `-webkit-line-clamp` for cross-browser text truncation
 
 ## 3.11 Code Structure and Comments
 
@@ -334,43 +337,53 @@ Example from js/home.js:
 ```
 WebDev_Phase2/
 ├── sec2_gr12_fe_src/
-│   ├── server.js           # Express server with clean URL routing (port 5500)
-│   ├── package.json        # Frontend dependencies (express)
-│   ├── index.html          # Home page
-│   ├── search.html         # Browse/Search games
-│   ├── detail.html         # Game detail
-│   ├── cart.html           # Shopping cart
-│   ├── wishlist.html       # Wishlist
-│   ├── user-login.html     # User sign in / register
-│   ├── team.html           # Team members
-│   ├── login.html          # Admin login
-│   ├── admin.html          # Admin dashboard
+│   ├── server.js              # Express server with clean URL routing (port 5500)
+│   ├── package.json           # Frontend dependencies (express)
+│   ├── index.html             # Home page
+│   ├── search.html            # Browse/Search games
+│   ├── detail.html            # Game detail
+│   ├── cart.html              # Shopping cart
+│   ├── wishlist.html          # Wishlist
+│   ├── user-login.html        # User sign in / register
+│   ├── team.html              # Team members
+│   ├── login.html             # Admin login
+│   ├── admin.html             # Admin dashboard
 │   ├── css/
-│   │   └── style.css       # Global stylesheet (~64KB)
-│   └── js/
-│       ├── home.js          # Homepage carousels + news API
-│       ├── search.js        # Multi-criteria search
-│       ├── detail.js        # Game detail, gallery, reviews
-│       ├── cart.js          # Cart management
-│       ├── wishlist.js      # Wishlist management
-│       ├── admin.js         # Admin CRUD dashboard
-│       ├── login.js         # Admin login handler
-│       ├── user-login.js    # User register/login
-│       └── team.js          # Team member rendering
+│   │   └── style.css          # Global stylesheet (~77KB, ~3200 lines)
+│   ├── js/
+│   │   ├── home.js            # Homepage carousels + news API
+│   │   ├── search.js          # Multi-criteria search
+│   │   ├── detail.js          # Game detail, gallery, reviews
+│   │   ├── cart.js            # Cart management (1-per-game)
+│   │   ├── wishlist.js        # Wishlist management
+│   │   ├── admin.js           # Admin CRUD dashboard
+│   │   ├── login.js           # Admin login handler
+│   │   ├── user-login.js      # User register/login
+│   │   └── team.js            # Team member rendering
+│   └── images/
+│       ├── games/             # Local game images per game folder
+│       │   ├── <GameFolder>/
+│       │   │   ├── front.jpg  # Card cover image
+│       │   │   ├── detail_1.jpg
+│       │   │   └── detail_N.jpg
+│       └── team/
+│           └── <studentId>.jpg  # Team member profile photos
 ├── sec2_gr12_ws_src/
-│   ├── server.js            # Express API entry point (port 3000)
+│   ├── server.js              # Express API entry point (port 3000)
+│   ├── .env                   # Database credentials and port config
 │   ├── config/
-│   │   └── db.js            # MySQL connection pool + database initialization
-│   ├── sec2_gr12_database.sql  # 10 tables + seed data
-│   ├── package.json         # Backend dependencies
+│   │   └── db.js              # MySQL connection pool + database initialization
+│   ├── sec2_gr12_database.sql # 10 tables + 24 games + 41 reviews + seed data
+│   ├── package.json           # Backend dependencies
 │   └── routes/
-│       ├── games.js         # Game CRUD + search (6 endpoints)
-│       ├── auth.js          # Admin login (1 endpoint)
-│       ├── reviews.js       # Reviews CRUD + stats (4 endpoints)
-│       ├── cart.js          # Cart management (6 endpoints)
-│       ├── wishlist.js      # Wishlist management (4 endpoints)
-│       ├── users.js         # User auth (3 endpoints)
-│       └── news.js          # FreeToGame API proxy (1 endpoint)
+│       ├── games.js           # Game CRUD + search (6 endpoints)
+│       ├── auth.js            # Admin login (1 endpoint)
+│       ├── reviews.js         # Reviews CRUD + stats (4 endpoints)
+│       ├── cart.js            # Cart management (5 endpoints, 1-per-game)
+│       ├── wishlist.js        # Wishlist management (4 endpoints)
+│       ├── users.js           # User auth (3 endpoints)
+│       └── news.js            # FreeToGame API proxy (1 endpoint)
+├── GAME.csv                   # Reference game data (not imported directly)
 ├── README.md
 └── .gitignore
 ```

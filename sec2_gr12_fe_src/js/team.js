@@ -1,4 +1,4 @@
-﻿/**
+/**
  * team.js —Team Page Logic
  * 
  * Renders team member cards with personal information including:
@@ -24,32 +24,32 @@ document.addEventListener('DOMContentLoaded', () => {
             lastName: 'Athipornwanit',
             studentId: '6788004',
             role: 'Frontend Developer',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Promdpoori&backgroundColor=b6e3f4',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '💻' }
+            image: '/images/team/6788004.jpg',
+            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
         },
         {
             firstName: 'Numning',
             lastName: 'Sungkagul',
             studentId: '6788121',
             role: 'Backend Developer',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Numning&backgroundColor=c0aede',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '💻' }
+            image: '/images/team/6788121.jpg',
+            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
         },
         {
             firstName: 'Kasidech',
             lastName: 'Thongpakdee',
             studentId: '6788134',
             role: 'Database Designer',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kasidech&backgroundColor=ffd5dc',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '💻' }
+            image: '/images/team/6788134.jpg',
+            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
         },
         {
             firstName: 'Nannalin',
             lastName: 'Leelaparung',
             studentId: '6788181',
             role: 'UI/UX Designer',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nannalin&backgroundColor=d1f4d1',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '💻' }
+            image: '/images/team/6788181.jpg',
+            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
         },
     ];
 

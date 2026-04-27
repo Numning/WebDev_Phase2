@@ -13,16 +13,16 @@ The database (game_store) stores all persistent data for the GameHub platform in
 
 | Table Name    | Description                                | Key Columns                                      |
 |---------------|--------------------------------------------|--------------------------------------------------|
-| Administrator | Admin user profile information             | AdminID, FirstName, LastName, Email               |
-| AdminLogin    | Login credentials with bcrypt hash         | LoginID, AdminID, Username, Password, LastLoginLog|
-| Game          | Game catalog with pricing and images       | GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages |
-| Genre         | Game genre categories                      | GenreID, Name                                    |
-| GameGenre     | Many-to-many game-genre junction table     | GameID, GenreID                                  |
-| Review        | User-submitted game reviews (1-5 stars)    | ReviewID, GameID, ReviewerName, Rating, Comment, CreatedAt |
-| Wishlist      | Session-based game wishlist                | WishlistID, GameID, SessionID, AddedAt           |
-| AdminAddGame  | Tracks which admin added which game        | AdminID, GameID, AddedAt                         |
-| User          | Customer accounts with bcrypt passwords    | UserID, Username, Email, Password, FirstName, LastName, CreatedAt |
-| Cart          | Session-based shopping cart items           | CartID, GameID, SessionID, Quantity, AddedAt      |
+| Administrator | Admin user profile information (10 records)| AdminID, FirstName, LastName, Email               |
+| AdminLogin    | Login credentials with bcrypt hash (10 records)| LoginID, AdminID, Username, Password, Role, LastLoginLog|
+| Game          | Game catalog with local image paths (24 records)| GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages |
+| Genre         | Game genre categories (28 genres)          | GenreID, Name                                    |
+| GameGenre     | Many-to-many game-genre junction table (72 records) | GameID, GenreID                           |
+| Review        | User-submitted game reviews — 41 reviews   | ReviewID, GameID, ReviewerName, Rating, Comment, CreatedAt |
+| Wishlist      | Session-based game wishlist (10 records)   | WishlistID, GameID, SessionID, AddedAt           |
+| AdminAddGame  | Tracks which admin added which game (24 records)| AdminID, GameID, AddedAt                    |
+| User          | Customer accounts with bcrypt passwords (10 records) | UserID, Username, Email, Password, FirstName, LastName, CreatedAt |
+| Cart          | Session-based cart — **1 game per session** (10 records) | CartID, GameID, SessionID, Quantity, AddedAt |
 
 ## 4.3 Authentication Service
 
@@ -456,13 +456,13 @@ The repository includes a comprehensive README.md with project structure, prereq
 
 # 8. Conclusion
 
-This project successfully implemented a full-stack web application for the gaming e-commerce domain using HTML5, CSS3, JavaScript, Node.js with Express.js, and MySQL. The GameHub platform enables users to browse, search, and explore a catalog of games with rich detail pages, manage shopping carts and wishlists, submit reviews, and create customer accounts.
+This project successfully implemented a full-stack web application for the gaming e-commerce domain using HTML5, CSS3, JavaScript, Node.js with Express.js, and MySQL. The GameHub platform enables users to browse, search, and explore a catalog of games with rich detail pages featuring **locally hosted images**, manage shopping carts (1 copy per game) and wishlists, submit reviews, and create customer accounts.
 
-The system includes 9 front-end pages with consistent navigation and dark-themed responsive design, administrator authentication with bcrypt password hashing, multi-criteria game search with 5 filter parameters, detailed game viewing with image galleries and tabbed content, full CRUD game management via an admin dashboard with modal forms and genre checkboxes, a review system with ratings and statistics, session-based cart and wishlist functionality, customer registration and login, and integration with the FreeToGame public API for displaying latest free-to-play game releases.
+The system includes 9 front-end pages with consistent navigation, a **CSS mask-image SVG icon system**, and a dark-themed responsive design. The key features include: administrator authentication with bcrypt password hashing, multi-criteria game search, detailed game viewing with **local image gallery slider** and tabbed content, full CRUD game management, a review system with ratings and star-distribution statistics, session-based cart with 1-per-game enforcement and wishlist, customer registration and login, real team profile photos, and integration with the FreeToGame public API.
 
-The back-end provides 25 RESTful API endpoints across seven route modules (games, auth, reviews, cart, wishlist, users, news), connected to a MySQL database with 10 relational tables containing seed data including 19 games, multiple genres, admin accounts, and sample reviews. All web services are documented with inline Postman test cases and were verified using Postman.
+The back-end provides 25 RESTful API endpoints across seven route modules (games, auth, reviews, cart, wishlist, users, news), connected to a MySQL database with **10 relational tables** each containing **10+ seed records**: 24 games, 28 genres, 10 administrators, 10 admin logins, 10 users, 41 reviews, 10 wishlist entries, 10 cart entries, and 72 genre mappings. All web services are documented with inline Postman test cases.
 
-Through this project, the team gained practical experience in full-stack web development, database design, RESTful API development, front-end and back-end integration on separate servers, public API consumption, and systematic testing methodology.
+Through this project, the team gained practical experience in full-stack web development, database design, RESTful API development, front-end and back-end integration on separate servers, local static asset management, public API consumption, and systematic testing methodology.
 
 
 ---
@@ -470,16 +470,24 @@ Through this project, the team gained practical experience in full-stack web dev
 # 9. Appendix
 
 ## Appendix A: Database Tables / Sample Records
-- **Administrator** — 1 admin account (Admin User)
-- **AdminLogin** — 1 login credential (admin / admin123, bcrypt hashed)
-- **Game** — 19 game products with full details
-- **Genre** — 10+ genre categories (Action, RPG, Strategy, etc.)
-- **GameGenre** — Many-to-many mappings
-- **Review** — Sample user reviews with ratings
-- **Wishlist** — Session-based entries
-- **Cart** — Session-based cart items
-- **User** — Sample customer accounts
-- **AdminAddGame** — Admin-game tracking records
+- **Administrator** — 10 admin accounts (Admin User + 7 managers + 2 moderators)
+- **AdminLogin** — 10 login credentials (bcrypt hashed, roles: super_admin / manager / moderator)
+- **Game** — **24 game products** with full details and **locally hosted images** (`/images/games/<folder>/front.jpg`)
+- **Genre** — 28 genre categories (Action, RPG, Strategy, Simulation, Fantasy, etc.)
+- **GameGenre** — 72 many-to-many mappings
+- **Review** — **41 user reviews** with ratings across 23 games
+- **Wishlist** — 10 session-based entries
+- **Cart** — 10 session-based cart items (1 copy per game rule enforced)
+- **User** — 10 customer accounts
+- **AdminAddGame** — 24 admin-game tracking records
+
+## Appendix B: Local Image System
+Game images are served by the frontend Express server from the `images/` directory:
+- **Cover image**: `/images/games/<GameFolder>/front.jpg` — used for cards and gallery main slot
+- **Gallery images**: `/images/games/<GameFolder>/detail_1.jpg`, `detail_2.jpg`, ... `detail_N.jpg` — used in the slider
+- **Team photos**: `/images/team/<studentId>.jpg` — displayed on the team page
+
+The `server.js` serves these via: `app.use('/images', express.static(path.join(__dirname, 'images')))`
 
 ## Appendix B: Key Code Snippets
 1. Admin Login Route (sec2_gr12_ws_src/routes/auth.js) — Login with bcrypt comparison
