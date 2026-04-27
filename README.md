@@ -109,6 +109,20 @@ Visit **http://localhost:5500** to access the application.
 
 > **Important:** Both servers must be running simultaneously. The frontend makes API calls to the backend at `http://localhost:3000/api/`.
 
+### ⚠️ Resetting the Database (for teammates with old schema)
+
+If your machine already has an older version of the `game_store` database, the backend will skip re-importing and keep the stale data. To force a full fresh install:
+
+1. Open `sec2_gr12_ws_src/.env`
+2. Add this line: `DB_RESET=true`
+3. Restart the backend: `npm start` in `sec2_gr12_ws_src`
+4. The server will **drop** the old database and **recreate** it with the latest schema and seed data
+5. **Remove `DB_RESET=true`** (or comment it out: `# DB_RESET=true`) immediately after — otherwise it will wipe your data on every restart
+
+```env
+# DB_RESET=true   ← uncomment temporarily, then remove after restart
+```
+
 ## Pages (Frontend)
 
 The frontend is a fully responsive multi-page application with clean URL routing.

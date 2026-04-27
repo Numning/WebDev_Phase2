@@ -1,13 +1,17 @@
 /**
  * Database Module
- * 
+ *
  * Provides the MySQL connection pool and database initialization for GameHub.
  * - pool: A reusable connection pool for queries across route modules.
  * - initDatabase(): Creates the game_store database and runs the SQL schema
- *   file if tables do not already exist. All seed data (games, genres, admins,
- *   etc.) is defined as SQL INSERT statements inside the schema file.
- * 
+ *   file to create tables and insert seed data.
+ *
  * All credentials are loaded from the .env file for portability.
+ *
+ * RESET: Set DB_RESET=true in .env to drop and recreate the database from
+ * scratch. Useful when a teammate has an old version of the database.
+ * Remember to remove DB_RESET=true after the reset so it doesn't wipe data
+ * on every server restart.
  */
 
 require('dotenv').config();
@@ -39,12 +43,23 @@ const DB_NAME = process.env.DB_NAME || 'game_store';
 
 /**
  * Initializes the database:
- * 1. Creates the database if it does not exist
- * 2. Checks if tables already exist (skips seeding if so)
- * 3. Runs the SQL schema file to create tables and insert seed data
+ * 1. If DB_RESET=true — drops and recreates the database (fresh install)
+ * 2. Otherwise — creates the database if it does not exist
+ * 3. Checks if tables already exist (skips seeding if so)
+ * 4. Runs the SQL schema file to create tables and insert seed data
+ *
+ * To reset: set DB_RESET=true in .env, restart server, then remove it.
  */
 async function initDatabase() {
     const connection = await mysql.createConnection(DB_CONFIG);
+    const shouldReset = process.env.DB_RESET === 'true';
+
+    if (shouldReset) {
+        // ⚠️  Drop entire database and recreate from scratch
+        console.log(`⚠️  DB_RESET=true — Dropping database "${DB_NAME}"...`);
+        await connection.query(`DROP DATABASE IF EXISTS \`${DB_NAME}\``);
+        console.log(`🗑️  Database "${DB_NAME}" dropped.`);
+    }
 
     // Create database if needed
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\``);
