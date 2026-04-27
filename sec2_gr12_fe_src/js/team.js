@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentId: '6788004',
             role: 'Frontend Developer',
             image: '/images/team/6788004.jpg',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
+            social: { platform: 'GitHub', url: 'https://github.com/promdpooriath-create', icon: '<i class="icon-users"></i>' }
         },
         {
             firstName: 'Numning',
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentId: '6788121',
             role: 'Backend Developer',
             image: '/images/team/6788121.jpg',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
+            social: { platform: 'GitHub', url: 'https://github.com/Numning', icon: '<i class="icon-users"></i>' }
         },
         {
             firstName: 'Kasidech',
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentId: '6788134',
             role: 'Database Designer',
             image: '/images/team/6788134.jpg',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
+            social: { platform: 'GitHub', url: 'https://github.com/Kasidechthn', icon: '<i class="icon-users"></i>' }
         },
         {
             firstName: 'Nannalin',
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentId: '6788181',
             role: 'UI/UX Designer',
             image: '/images/team/6788181.jpg',
-            social: { platform: 'GitHub', url: 'https://github.com/', icon: '<i class="icon-users"></i>' }
+            social: { platform: 'GitHub', url: 'https://github.com/nannalinlee-beep', icon: '<i class="icon-users"></i>' }
         },
     ];
 
