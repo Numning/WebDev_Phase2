@@ -169,7 +169,7 @@ async function loadGameDetail(id) {
                     ${priceHtml}
                     <div class="action-buttons">
                         <button class="btn btn-success" onclick="addToCart(${game.GameID})"><i class="icon-cart"></i> Add to Cart</button>
-                        <button class="btn btn-primary" onclick="alert('${buttonText}!')">${buttonText}</button>
+                        <button class="btn btn-primary" onclick="addToCart(${game.GameID}); setTimeout(()=>window.location.href='/cart',800)">${buttonText}</button>
                         <button class="${wishBtnClass}" id="wishlist-btn" data-game-id="${game.GameID}" style="margin-top:8px; width:100%;">${wishBtnText}</button>
                     </div>
                 </div>
@@ -307,7 +307,7 @@ function setupWishlistBtn(gameId) {
                 btn.className = 'btn btn-secondary';
                 btn.style.marginTop = '8px';
                 btn.style.width = '100%';
-                btn.textContent = '<i class="icon-heart"></i> Add to Wishlist';
+                btn.innerHTML = '<i class="icon-heart"></i> Add to Wishlist';
             } else {
                 // Add to wishlist
                 await fetch(`${API_BASE}/wishlist`, {
@@ -318,7 +318,7 @@ function setupWishlistBtn(gameId) {
                 btn.className = 'btn btn-danger';
                 btn.style.marginTop = '8px';
                 btn.style.width = '100%';
-                btn.textContent = '<i class="icon-heart-filled"></i>Wishlisted';
+                btn.innerHTML = '<i class="icon-heart-filled"></i> Wishlisted';
             }
         } catch (err) {
             console.error('Wishlist error:', err);
@@ -410,7 +410,7 @@ function setupTabs() {
  */
 function showError(msg) {
     const container = document.getElementById('detail-container');
-    container.innerHTML = `<div class="empty-state" style="padding-top:150px;"><div class="icon"><i class="icon-heart"></i></div><h3>${msg}</h3><a href="/games" class="btn btn-primary" style="margin-top:1rem;">Browse Games</a></div>`;
+    container.innerHTML = `<div class="empty-state" style="padding-top:150px;"><div class="icon"><i class="icon-x-circle"></i></div><h3>${msg}</h3><a href="/games" class="btn btn-primary" style="margin-top:1rem;">Browse Games</a></div>`;
 }
 
 /**

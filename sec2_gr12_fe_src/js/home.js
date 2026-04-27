@@ -1,4 +1,4 @@
-﻿/**
+/**
  * home.js —Home Page Logic
  * 
  * Fetches game data from the backend API and renders the homepage sections:
@@ -116,7 +116,7 @@ function renderFeatured(game) {
             <p class="featured-desc">${game.Description ? game.Description.substring(0, 160) + '...' : 'Experience the future of gaming.'}</p>
             <div class="featured-actions">
                 <a href="/game?id=${game.GameID}" class="btn btn-white">BUY NOW —${priceDisplay}</a>
-                <button class="btn btn-secondary">+ to Wishlist</button>
+                <button class="btn btn-secondary" onclick="addToWishlist(${game.GameID})">+ Wishlist</button>
             </div>
         </div>
     `;
@@ -261,7 +261,7 @@ function renderMostPopular(games) {
         return `
         <a href="/game?id=${game.GameID}" style="min-width: 300px; text-decoration: none; color: inherit; flex-shrink: 0;">
             <div class="popular-card" style="margin-bottom: 8px;">
-                <div class="popular-rank">0${i + 1}</div>
+                <div class="popular-rank">${String(i + 1).padStart(2, '0')}</div>
                 <img src="${thumb}" alt="${game.Title}" class="popular-thumb"
                      onerror="this.src='https://images.unsplash.com/photo-1552820728-8b83bb6b2b28?w=100&h=100&fit=crop'">
                 <div class="popular-info">
@@ -472,4 +472,35 @@ async function updateCartBadge() {
             b.style.display = data.count > 0 ? 'inline-block' : 'none';
         });
     } catch(e) {}
+}
+
+/**
+ * Adds a game to the wishlist from the featured banner.
+ * @param {number} gameId - The ID of the game to wishlist
+ */
+async function addToWishlist(gameId) {
+    const sessionId = localStorage.getItem('sessionId');
+    if (!sessionId) return;
+    try {
+        const res = await fetch(`${API_BASE}/wishlist`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ gameId, sessionId })
+        });
+        if (res.ok) {
+            // Find the wishlist button and give visual feedback
+            const btn = document.querySelector('.featured-actions .btn-secondary');
+            if (btn) {
+                const original = btn.innerHTML;
+                btn.innerHTML = '✓ Wishlisted';
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.disabled = false;
+                }, 1500);
+            }
+        }
+    } catch (err) {
+        console.error('Error adding to wishlist:', err);
+    }
 }
