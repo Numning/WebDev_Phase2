@@ -13,21 +13,21 @@ The `game_store` database stores all persistent data for the GameHub platform, i
 
 | Table Name    | Description                                     | Key Columns                                                                           |
 |---------------|-------------------------------------------------|---------------------------------------------------------------------------------------|
-| Administrator | Admin user profile information (10 records)     | AdminID, FirstName, LastName, Email                                                   |
-| AdminLogin    | Login credentials with bcrypt hash (10 records) | LoginID, AdminID, Username, Password, Role, LastLoginLog                              |
-| Game          | Game catalog with local image paths (24 records)| GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages |
-| Genre         | Game genre categories (28 genres)               | GenreID, Name                                                                         |
-| GameGenre     | Many-to-many game-genre junction (72 records)   | GameID, GenreID                                                                       |
-| Review        | User-submitted game reviews (41 records)        | ReviewID, GameID, ReviewerName, Rating, Comment, CreatedAt                            |
-| Wishlist      | Session-based game wishlist (10 records)        | WishlistID, GameID, SessionID, AddedAt                                                |
-| AdminAddGame  | Tracks which admin added which game (24 records)| AdminID, GameID, AddedAt                                                              |
-| User          | Customer accounts with bcrypt passwords (10 records) | UserID, Username, Email, Password, FirstName, LastName, CreatedAt               |
-| Cart          | Session-based cart — 1 game per session (10 records) | CartID, GameID, SessionID, Quantity, AddedAt                                    |
+| Administrator | Admin user profile information (15 records)      | AdminID, FirstName, LastName, Email                                                   |
+| AdminLogin    | Login credentials (15 records)                   | LoginID, AdminID, Username, Password, Role, LastLoginLog                              |
+| Game          | Game catalog with local image paths (24 records) | GameID, Title, Price, PricingType, SalePercent, Description, ReleaseDate, ImageUrl, GalleryImages |
+| Genre         | Game genre categories (28 genres)                | GenreID, Name                                                                         |
+| GameGenre     | Many-to-many game-genre junction (72 records)    | GameID, GenreID                                                                       |
+| Review        | User-submitted game reviews (41 records)         | ReviewID, GameID, ReviewerName, Rating, Comment, CreatedAt                            |
+| Wishlist      | Session-based game wishlist (15 records)         | WishlistID, GameID, SessionID, AddedAt                                                |
+| AdminAddGame  | Tracks which admin added which game (24 records) | AdminID, GameID, AddedAt                                                              |
+| User          | Customer accounts (15 records)                   | UserID, Username, Email, Password, FirstName, LastName, CreatedAt                     |
+| Cart          | Session-based cart — 1 game per session (15 records) | CartID, GameID, SessionID, Quantity, AddedAt                                      |
 
 ## 4.3 Authentication Service
 
 ### Purpose
-Authenticates administrators during login using bcrypt password comparison.
+Authenticates administrators during login using direct password comparison.
 
 ### Endpoint
 `POST /api/auth/login`
@@ -66,7 +66,7 @@ Authenticates administrators during login using bcrypt password comparison.
 1. **Input validation**: Checks that both username and password are provided. Returns 400 if either is missing.
 2. **Database query**: Executes a JOIN query on AdminLogin and Administrator tables using a parameterized query to prevent SQL injection.
 3. **Username check**: If no matching row is found, returns 401 with a generic error message.
-4. **Password comparison**: Uses `bcrypt.compare()` to compare the provided password against the stored bcrypt hash. Returns 401 on mismatch.
+4. **Password comparison**: Compares the provided password directly against the stored password value. Returns 401 on mismatch.
 5. **Success**: Updates the `LastLoginLog` timestamp and returns the admin profile object.
 
 ### Code Snippet
@@ -85,8 +85,7 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ error: 'Invalid username or password' });
     }
     const admin = rows[0];
-    const isMatch = await bcrypt.compare(password, admin.Password);
-    if (!isMatch) {
+    if (password !== admin.Password) {
         return res.status(401).json({ error: 'Invalid username or password' });
     }
     await pool.query('UPDATE AdminLogin SET LastLoginLog = NOW() WHERE LoginID = ?', [admin.LoginID]);

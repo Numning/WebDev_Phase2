@@ -181,33 +181,43 @@ If your machine already has an older version of the `game_store` database and th
 
 ### Admin Accounts
 
-| Username  | Password   | Role            |
-| --------- | ---------- | --------------- |
-| `admin`   | `admin123` | Super Admin     |
-| `sarah`   | `admin123` | Manager         |
-| `mike`    | `admin123` | Manager         |
-| `lisa`    | `admin123` | Manager         |
-| `lucas`   | `admin123` | Manager         |
-| `mia`     | `admin123` | Manager         |
-| `sophia`  | `admin123` | Moderator       |
-| `oliver`  | `admin123` | Moderator       |
-| `noah`    | `admin123` | Moderator       |
-| `olivia`  | `admin123` | Moderator       |
-| `ethan`   | `admin123` | Content Manager |
+| Username    | Password   | Role            |
+| ----------- | ---------- | --------------- |
+| `admin`     | `admin123` | Super Admin     |
+| `sarah`     | `admin123` | Manager         |
+| `mike`      | `admin123` | Manager         |
+| `lisa`      | `admin123` | Manager         |
+| `tom`       | `admin123` | Manager         |
+| `emma`      | `admin123` | Manager         |
+| `james`     | `admin123` | Manager         |
+| `lucas`     | `admin123` | Manager         |
+| `mia`       | `admin123` | Manager         |
+| `sophia`    | `admin123` | Moderator       |
+| `oliver`    | `admin123` | Moderator       |
+| `isabella`  | `admin123` | Moderator       |
+| `noah`      | `admin123` | Moderator       |
+| `olivia`    | `admin123` | Moderator       |
+| `ethan`     | `admin123` | Content Manager |
 
 ### User Accounts
 
-| Username         | Password  | Name          |
-| ---------------- | --------- | ------------- |
-| `john_doe`       | `user123` | John Doe      |
-| `jane_smith`     | `user123` | Jane Smith    |
-| `alex_gamer`     | `user123` | Alex Wong     |
-| `gamer_thai`     | `user123` | Somsak Jaidee |
-| `space_gamer`    | `user123` | Alex Chen     |
-| `night_hunter`   | `user123` | Sara Kim      |
-| `pixel_master`   | `user123` | Mike Ross     |
-| `loot_goblin`    | `user123` | Tanya Singh   |
-| `open_world_fan` | `user123` | Leo Tanaka    |
+| Username         | Password  | Name            |
+| ---------------- | --------- | --------------- |
+| `john_doe`       | `user123` | John Doe        |
+| `jane_smith`     | `user123` | Jane Smith      |
+| `alex_gamer`     | `user123` | Alex Wong       |
+| `player_one`     | `user123` | Sam Lee         |
+| `pro_gamer`      | `user123` | Chris Park      |
+| `gamer_thai`     | `user123` | Somsak Jaidee   |
+| `rpg_lover`      | `user123` | Wanida Sukjai   |
+| `fps_king`       | `user123` | Arjun Patel     |
+| `indie_fan`      | `user123` | Napat Wongkham  |
+| `casual_play`    | `user123` | Pranee Chaichan |
+| `space_gamer`    | `user123` | Alex Chen       |
+| `night_hunter`   | `user123` | Sara Kim        |
+| `pixel_master`   | `user123` | Mike Ross       |
+| `loot_goblin`    | `user123` | Tanya Singh     |
+| `open_world_fan` | `user123` | Leo Tanaka      |
 
 ---
 
@@ -295,7 +305,7 @@ The database (`game_store`) consists of **10 tables**:
 | Table        | Description                                       |
 | ------------ | ------------------------------------------------- |
 | Administrator | Admin user profile information                   |
-| AdminLogin   | Login credentials (bcrypt hashed) and login log  |
+| AdminLogin   | Login credentials and login log                  |
 | Game         | Game catalog with pricing and image data          |
 | Genre        | Game genre categories                             |
 | GameGenre    | Many-to-many game-to-genre junction table         |
@@ -329,7 +339,7 @@ The database (`game_store`) consists of **10 tables**:
 | Frontend   | HTML5, CSS3, Vanilla JavaScript |
 | Backend    | Node.js, Express.js             |
 | Database   | MySQL                           |
-| Auth       | bcryptjs (password hashing)     |
+| Auth       | Plain text password comparison  |
 | CORS       | cors middleware                 |
 | Env Config | dotenv                          |
 

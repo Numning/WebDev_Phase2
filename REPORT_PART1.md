@@ -84,7 +84,7 @@ The system supports two main user groups:
 | Front-end Server    | Node.js, Express.js (static file serving with clean URL routing)  |
 | Back-end            | Node.js, Express.js                                               |
 | Database            | MySQL (accessed via mysql2/promise)                               |
-| Authentication      | bcryptjs (password hashing)                                       |
+| Authentication      | Plain text password comparison                                    |
 | Web Service Testing | Postman                                                           |
 | Public Web Service  | FreeToGame API (free, no API key required)                        |
 | Environment Config  | dotenv                                                            |

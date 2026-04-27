@@ -38,7 +38,6 @@
 
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const { pool } = require('../config/db');
 
 /**
@@ -62,12 +61,10 @@ router.post('/register', async (req, res) => {
             return res.status(409).json({ error: 'Username or email already exists' });
         }
 
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
+        // Store password as plain text
         const [result] = await pool.query(
             'INSERT INTO User (Username, Email, Password, FirstName, LastName) VALUES (?, ?, ?, ?, ?)',
-            [username, email, hashedPassword, firstName, lastName]
+            [username, email, password, firstName, lastName]
         );
 
         res.status(201).json({
@@ -108,8 +105,8 @@ router.post('/login', async (req, res) => {
         }
 
         const user = rows[0];
-        const isMatch = await bcrypt.compare(password, user.Password);
-        if (!isMatch) {
+        // Compare password directly (plain text)
+        if (password !== user.Password) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 

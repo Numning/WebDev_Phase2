@@ -33,7 +33,6 @@
 
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const { pool } = require('../config/db');
 
 /**
@@ -65,9 +64,8 @@ router.post('/login', async (req, res) => {
 
         const admin = rows[0];
 
-        // Compare password with stored bcrypt hash
-        const isMatch = await bcrypt.compare(password, admin.Password);
-        if (!isMatch) {
+        // Compare password directly (plain text)
+        if (password !== admin.Password) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
