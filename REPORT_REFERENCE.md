@@ -124,19 +124,19 @@ The frontend consists of **9 HTML pages** served by an Express server with clean
 | Admin Login       | `login.html`      | `/admin/login` | Admin authentication form                |
 | Admin Dashboard   | `admin.html`      | `/admin`       | Game management table with CRUD modal    |
 
-### 4.2 Frontend Server (`frontend/server.js`)
+### 4.2 Frontend Server (`sec2_gr12_fe_src/server.js`)
 
 - Serves static files (CSS, JS) and maps clean URLs to HTML files.
 - Old `.html` URLs redirect (301) to clean URLs for backward compatibility.
 - Runs on port **5500**.
 
-### 4.3 CSS Styling (`frontend/css/style.css`)
+### 4.3 CSS Styling (`sec2_gr12_fe_src/css/style.css`)
 
 - Single global stylesheet (64KB) with CSS custom properties for theming.
 - Dark theme design with consistent color variables.
 - Responsive layout using CSS Grid and Flexbox.
 
-### 4.4 JavaScript Files (`frontend/js/`)
+### 4.4 JavaScript Files (`sec2_gr12_fe_src/js/`)
 
 | File            | Lines | Purpose                                          |
 | --------------- | ----- | ------------------------------------------------ |
@@ -157,11 +157,10 @@ The backend is a **Node.js + Express** RESTful API server.
 | File              | Purpose                                          |
 | ----------------- | ------------------------------------------------ |
 | `server.js`       | Main entry point, middleware, route registration |
-| `db.js`           | MySQL connection pool (credentials from `.env`)  |
-| `initDb.js`       | Auto-creates database and runs `schema.sql`      |
-| `schema.sql`      | 10 tables + seed data (19 games, genres, etc.)   |
+| `config/db.js`    | MySQL connection pool + database initialization |
+| `sec2_gr12_database.sql` | 10 tables + seed data (19 games, genres, etc.) |
 
-### 4.6 Backend Route Modules (`backend/routes/`)
+### 4.6 Backend Route Modules (`sec2_gr12_ws_src/routes/`)
 
 | File           | Endpoints | Key Operations                      |
 | -------------- | --------- | ----------------------------------- |

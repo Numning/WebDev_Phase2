@@ -158,7 +158,7 @@ Figure 1. Navigation Diagram of the Web Application
 
 ## 3.1 Front-end Overview
 
-The front-end was implemented using HTML5, CSS3, and JavaScript. It is hosted on a separate Express server (port 5500) with clean URL routing. All pages include a navigation bar and footer, use semantic HTML elements, and connect to the back-end API at http://localhost:3000/api. The front-end consists of 9 HTML pages, 1 CSS file (css/style.css), and 9 JavaScript files in the js/ directory.
+The front-end was implemented using HTML5, CSS3, and JavaScript. It is hosted on a separate Express server (port 5500) with clean URL routing. All pages include a navigation bar and footer, use semantic HTML elements, and connect to the back-end API at http://localhost:3000/api. The front-end source is located in the `sec2_gr12_fe_src/` directory and consists of 9 HTML pages, 1 CSS file (css/style.css), and 9 JavaScript files in the js/ directory.
 
 ## 3.2 Home Page
 
@@ -333,7 +333,7 @@ Example from js/home.js:
 
 ```
 WebDev_Phase2/
-├── frontend/
+├── sec2_gr12_fe_src/
 │   ├── server.js           # Express server with clean URL routing (port 5500)
 │   ├── package.json        # Frontend dependencies (express)
 │   ├── index.html          # Home page
@@ -357,11 +357,11 @@ WebDev_Phase2/
 │       ├── login.js         # Admin login handler
 │       ├── user-login.js    # User register/login
 │       └── team.js          # Team member rendering
-├── backend/
+├── sec2_gr12_ws_src/
 │   ├── server.js            # Express API entry point (port 3000)
-│   ├── db.js                # MySQL connection pool
-│   ├── initDb.js            # Auto database creation + schema runner
-│   ├── schema.sql           # 10 tables + seed data
+│   ├── config/
+│   │   └── db.js            # MySQL connection pool + database initialization
+│   ├── sec2_gr12_database.sql  # 10 tables + seed data
 │   ├── package.json         # Backend dependencies
 │   └── routes/
 │       ├── games.js         # Game CRUD + search (6 endpoints)

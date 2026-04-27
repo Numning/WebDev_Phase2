@@ -2,7 +2,7 @@
 
 ## 4.1 Back-end Overview
 
-The back-end was implemented using Node.js with the Express.js framework and connects to a MySQL database using the mysql2/promise library. It provides RESTful JSON web services for administrator authentication, game search and detail viewing, full game CRUD management, customer account registration and login, session-based cart management, session-based wishlist management, game review submission and statistics, and a FreeToGame public API proxy. The server entry point is backend/server.js, which mounts seven route modules under the /api prefix.
+The back-end was implemented using Node.js with the Express.js framework and connects to a MySQL database using the mysql2/promise library. It provides RESTful JSON web services for administrator authentication, game search and detail viewing, full game CRUD management, customer account registration and login, session-based cart management, session-based wishlist management, game review submission and statistics, and a FreeToGame public API proxy. The server entry point is sec2_gr12_ws_src/server.js, which mounts seven route modules under the /api prefix.
 
 ## 4.2 Database Overview
 
@@ -259,13 +259,13 @@ Displays the latest free-to-play game releases on the GameHub homepage, demonstr
 ## 4.10 Back-end Source Code Structure
 
 ```
-backend/
+sec2_gr12_ws_src/
 ├── server.js           # Express app entry point (middleware, route mounting)
-├── db.js               # MySQL connection pool (mysql2/promise, dotenv)
-├── initDb.js           # Auto-creates database + runs schema.sql on first start
-├── schema.sql          # 10 tables + seed data (19 games, genres, admins, reviews)
+├── config/
+│   └── db.js           # MySQL connection pool + database initialization
+├── sec2_gr12_database.sql  # 10 tables + seed data (19 games, genres, admins, reviews)
 ├── package.json        # Dependencies: express, mysql2, cors, dotenv, bcryptjs
-├── .env.example        # Environment template
+├── .env                # Environment variables (edit with your MySQL credentials)
 └── routes/
     ├── games.js        # GET/POST/PUT/DELETE /api/games (CRUD + search)
     ├── auth.js         # POST /api/auth/login (admin authentication)
@@ -402,7 +402,7 @@ The web services were tested using **Postman**. Test case specifications are doc
 - CORS middleware is enabled in the backend server.js to allow cross-origin requests.
 
 ## 6.2 Database Connection
-The back-end connects to MySQL through a connection pool configured in db.js using the mysql2/promise library. Connection parameters are loaded from environment variables in the .env file:
+The back-end connects to MySQL through a connection pool configured in config/db.js using the mysql2/promise library. Connection parameters are loaded from environment variables in the .env file:
 ```
 DB_HOST=localhost
 DB_PORT=3306
@@ -415,16 +415,16 @@ The pool is configured with `connectionLimit: 10`, `waitForConnections: true`, a
 ## 6.3 Deployment Readiness
 The project can be run on lecturer/LA machines with:
 - Required software: Node.js 14+, MySQL server
-- Database auto-creation: The backend automatically creates the database and tables on first run via initDb.js
-- No manual SQL import needed — schema.sql is executed automatically if tables don't exist
+- Database auto-creation: The backend automatically creates the database and tables on first run via config/db.js
+- No manual SQL import needed — sec2_gr12_database.sql is executed automatically if tables don't exist
 
 ## 6.4 README.md
 The repository includes a comprehensive README.md with project structure, prerequisites, step-by-step setup instructions, page listing, API endpoint reference, database table listing, tech stack, and default admin credentials.
 
 ## 6.5 File Naming and Submission Format
-- Frontend source: frontend/ directory
-- Backend source: backend/ directory
-- Database schema: backend/schema.sql
+- Frontend source: sec2_gr12_fe_src/ directory
+- Backend source: sec2_gr12_ws_src/ directory
+- Database schema: sec2_gr12_ws_src/sec2_gr12_database.sql
 
 
 ---
@@ -432,8 +432,8 @@ The repository includes a comprehensive README.md with project structure, prereq
 # 7. Deployment and Run Instructions Summary
 
 ## 7.1 Steps to Run the Back-end
-1. Navigate to the backend folder: `cd backend`
-2. Copy and configure environment: `cp .env.example .env` (edit with MySQL credentials)
+1. Navigate to the backend folder: `cd sec2_gr12_ws_src`
+2. Edit `.env` with your MySQL credentials (update `DB_PASSWORD`)
 3. Install dependencies: `npm install`
 4. Start the server: `npm start`
 5. The server automatically creates the database and tables on first run
@@ -441,7 +441,7 @@ The repository includes a comprehensive README.md with project structure, prereq
 
 ## 7.2 Steps to Run the Front-end
 1. Open a new terminal
-2. Navigate to the frontend folder: `cd frontend`
+2. Navigate to the frontend folder: `cd sec2_gr12_fe_src`
 3. Install dependencies: `npm install`
 4. Start the server: `npm start`
 5. Access at http://localhost:5500
@@ -449,7 +449,7 @@ The repository includes a comprehensive README.md with project structure, prereq
 ## 7.3 Database
 - The database is created automatically when the backend starts for the first time
 - No manual SQL import is required
-- Schema file location: backend/schema.sql (10 tables + seed data)
+- Schema file location: sec2_gr12_ws_src/sec2_gr12_database.sql (10 tables + seed data)
 
 
 ---
@@ -482,13 +482,13 @@ Through this project, the team gained practical experience in full-stack web dev
 - **AdminAddGame** — Admin-game tracking records
 
 ## Appendix B: Key Code Snippets
-1. Admin Login Route (backend/routes/auth.js) — Login with bcrypt comparison
-2. Game Search Route (backend/routes/games.js) — Multi-criteria search with dynamic SQL
-3. Game CRUD Routes (backend/routes/games.js) — Insert, Update, Delete with genre sync
-4. FreeToGame Proxy (backend/routes/news.js) — Public API integration
-5. Home Page Script (frontend/js/home.js) — Parallel API fetching and carousel rendering
-6. Detail Page Script (frontend/js/detail.js) — Gallery slider, reviews, wishlist toggle
-7. Database Config (backend/db.js) — MySQL connection pool setup
+1. Admin Login Route (sec2_gr12_ws_src/routes/auth.js) — Login with bcrypt comparison
+2. Game Search Route (sec2_gr12_ws_src/routes/games.js) — Multi-criteria search with dynamic SQL
+3. Game CRUD Routes (sec2_gr12_ws_src/routes/games.js) — Insert, Update, Delete with genre sync
+4. FreeToGame Proxy (sec2_gr12_ws_src/routes/news.js) — Public API integration
+5. Home Page Script (sec2_gr12_fe_src/js/home.js) — Parallel API fetching and carousel rendering
+6. Detail Page Script (sec2_gr12_fe_src/js/detail.js) — Gallery slider, reviews, wishlist toggle
+7. Database Config (sec2_gr12_ws_src/config/db.js) — MySQL connection pool + initialization
 
 
 ---

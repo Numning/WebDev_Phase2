@@ -1,0 +1,188 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Admin dashboard for managing games in the store."
+    />
+    <title>Admin Dashboard —GameHub</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="admin-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="admin-sidebar">
+        <div class="logo"><span style="font-size: 1rem"><i class="icon-gamepad"></i></span> GAMEHUB</div>
+        <nav class="sidebar-nav">
+          <a href="#" class="active"><i class="icon-bar-chart"></i> Dashboard</a>
+          <a href="#" class="active"><i class="icon-gamepad"></i> Manage Games</a>
+          <a href="/home"><i class="icon-home"></i> Home</a>
+          <a href="/games"><i class="icon-search"></i> Browse Games</a>
+          <a href="/team"><i class="icon-users"></i> Team</a>
+          <a href="#" class="logout-link" id="logout-btn"><i class="icon-logout"></i> Logout</a>
+        </nav>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="admin-main">
+        <header class="admin-header">
+          <div>
+            <h1>Manage Games</h1>
+            <p
+              style="color: var(--text-muted); margin-top: 0.25rem"
+              id="admin-welcome"
+            >
+              Welcome, Admin
+            </p>
+          </div>
+          <button class="btn btn-primary" id="add-game-btn">
+            + Add New Game
+          </button>
+        </header>
+
+        <!-- Data Table Section -->
+        <section class="data-table-wrapper">
+          <table class="data-table" id="games-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Game</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Release Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="games-tbody">
+              <tr>
+                <td colspan="7">
+                  <div class="loading-spinner">
+                    <div class="spinner"></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modal Overlay for Add/Edit Game -->
+    <div class="modal-overlay" id="game-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modal-title">Add New Game</h2>
+          <button class="modal-close" id="modal-close"><i class="icon-x"></i>/button>
+        </div>
+        <form id="game-form">
+          <input type="hidden" id="form-game-id" />
+          <div class="form-group">
+            <label for="form-title">Title</label>
+            <input
+              type="text"
+              id="form-title"
+              class="form-control"
+              placeholder="Game title"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label
+              >Genres
+              <span style="color: var(--text-muted); font-weight: 400"
+                >(Select all that apply)</span
+              ></label
+            >
+            <div id="genre-checkboxes" class="genre-grid">
+              <!-- Checkboxes will be injected by JS -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="form-price">Price (฿)</label>
+            <input
+              type="number"
+              id="form-price"
+              class="form-control"
+              placeholder="29.99"
+              step="0.01"
+              min="0"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="form-pricing-type">Pricing Type</label>
+            <select id="form-pricing-type" class="form-control">
+              <option value="Regular">Regular</option>
+              <option value="Sale">Sale</option>
+              <option value="Free">Free</option>
+            </select>
+          </div>
+          <div class="form-group" id="sale-percent-group" style="display: none">
+            <label for="form-sale-percent">Sale Discount (%)</label>
+            <input
+              type="number"
+              id="form-sale-percent"
+              class="form-control"
+              placeholder="20"
+              min="1"
+              max="99"
+            />
+          </div>
+          <div class="form-group">
+            <label for="form-description">Description</label>
+            <textarea
+              id="form-description"
+              class="form-control"
+              rows="4"
+              placeholder="Game description..."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="form-release-date">Release Date</label>
+            <input type="date" id="form-release-date" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="form-image-url">Main Image URL</label>
+            <input
+              type="url"
+              id="form-image-url"
+              class="form-control"
+              placeholder="https://example.com/image.jpg"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              >Gallery Images
+              <span style="color: var(--text-muted); font-weight: 400"
+                >(for detail page slider)</span
+              ></label
+            >
+            <div id="gallery-inputs"></div>
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              id="add-gallery-btn"
+              style="margin-top: 0.5rem"
+            >
+              + Add Image
+            </button>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="modal-cancel">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary" id="form-submit-btn">
+              Save Game
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>

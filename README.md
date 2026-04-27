@@ -6,47 +6,47 @@ A full-stack web application for a game store built with **HTML/CSS/JS** on the 
 
 ```
 WebDev_Phase2/
-├── frontend/              # Frontend server & static files (HTML, CSS, JS)
-│   ├── server.js          # Express server with clean URL routing (port 5500)
-│   ├── css/style.css      # Global stylesheet
-│   ├── js/                # Page-specific JavaScript files
-│   │   ├── home.js        # Homepage logic (carousels, featured, news)
-│   │   ├── search.js      # Game search with multi-criteria filtering
-│   │   ├── detail.js      # Game detail page (gallery, reviews, wishlist)
-│   │   ├── cart.js         # Shopping cart management
-│   │   ├── wishlist.js    # Wishlist functionality
-│   │   ├── admin.js       # Admin dashboard (CRUD operations)
-│   │   ├── login.js       # Admin login authentication
-│   │   ├── user-login.js  # User registration & login
-│   │   └── team.js        # Team member cards
-│   ├── index.html         # Home page
-│   ├── search.html        # Browse/Search games page
-│   ├── detail.html        # Game detail page
-│   ├── cart.html           # Shopping cart page
-│   ├── wishlist.html      # Wishlist page
-│   ├── user-login.html    # User sign in / register page
-│   ├── team.html          # Team members page
-│   ├── login.html         # Admin login page
-│   └── admin.html         # Admin dashboard page
+├── sec2_gr12_fe_src/       # Frontend server & static files (HTML, CSS, JS)
+│   ├── server.js           # Express server with clean URL routing (port 5500)
+│   ├── css/style.css       # Global stylesheet
+│   ├── js/                 # Page-specific JavaScript files
+│   │   ├── home.js         # Homepage logic (carousels, featured, news)
+│   │   ├── search.js       # Game search with multi-criteria filtering
+│   │   ├── detail.js       # Game detail page (gallery, reviews, wishlist)
+│   │   ├── cart.js          # Shopping cart management
+│   │   ├── wishlist.js     # Wishlist functionality
+│   │   ├── admin.js        # Admin dashboard (CRUD operations)
+│   │   ├── login.js        # Admin login authentication
+│   │   ├── user-login.js   # User registration & login
+│   │   └── team.js         # Team member cards
+│   ├── index.html          # Home page
+│   ├── search.html         # Browse/Search games page
+│   ├── detail.html         # Game detail page
+│   ├── cart.html            # Shopping cart page
+│   ├── wishlist.html       # Wishlist page
+│   ├── user-login.html     # User sign in / register page
+│   ├── team.html           # Team members page
+│   ├── login.html          # Admin login page
+│   └── admin.html          # Admin dashboard page
 │
-├── backend/               # Backend API server (Node.js + Express)
-│   ├── server.js          # Main Express server entry point (port 3000)
-│   ├── db.js              # MySQL connection pool configuration
-│   ├── initDb.js          # Database initialization & schema runner
-│   ├── schema.sql         # Database schema with 10 tables + seed data
-│   ├── routes/            # Express route modules
-│   │   ├── games.js       # Game CRUD endpoints (search, insert, update, delete)
-│   │   ├── auth.js        # Admin authentication endpoint
-│   │   ├── reviews.js     # Review endpoints (get, post, stats, delete)
-│   │   ├── wishlist.js    # Wishlist endpoints (get, add, remove, check)
-│   │   ├── cart.js        # Cart endpoints (get, add, update, remove, clear)
-│   │   ├── users.js       # User registration & login endpoints
-│   │   └── news.js        # Public API proxy (FreeToGame API)
-│   ├── .env.example       # Example environment variables template
-│   └── package.json       # Backend dependencies
+├── sec2_gr12_ws_src/        # Backend API server (Node.js + Express)
+│   ├── server.js           # Main Express server entry point (port 3000)
+│   ├── config/
+│   │   └── db.js           # MySQL connection pool + database initialization
+│   ├── sec2_gr12_database.sql  # Database schema with 10 tables + seed data
+│   ├── routes/             # Express route modules
+│   │   ├── games.js        # Game CRUD endpoints (search, insert, update, delete)
+│   │   ├── auth.js         # Admin authentication endpoint
+│   │   ├── reviews.js      # Review endpoints (get, post, stats, delete)
+│   │   ├── wishlist.js     # Wishlist endpoints (get, add, remove, check)
+│   │   ├── cart.js         # Cart endpoints (get, add, update, remove, clear)
+│   │   ├── users.js        # User registration & login endpoints
+│   │   └── news.js         # Public API proxy (FreeToGame API)
+│   ├── .env                # Environment variables (edit with your MySQL credentials)
+│   └── package.json        # Backend dependencies
 │
-├── .gitignore             # Git ignore rules (node_modules, .env)
-└── README.md              # This file
+├── .gitignore              # Git ignore rules (node_modules)
+└── README.md               # This file
 ```
 
 ## Prerequisites
@@ -58,30 +58,26 @@ WebDev_Phase2/
 
 ### 1. Configure Database Connection
 
-Copy the example environment file and fill in your MySQL credentials:
-
-```bash
-cd backend
-cp .env.example .env
-```
-
-Then edit `backend/.env` with your settings:
+Edit the `.env` file inside the `sec2_gr12_ws_src/` folder with your MySQL credentials:
 
 ```env
+# Database Configuration
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password_here
 DB_NAME=game_store
+
+# Server Configuration
 PORT=3000
 ```
 
-> **Note:** The `.env` file is excluded from git via `.gitignore` to keep credentials private.
+> **Note:** The default `.env` file is included in the repository. Update `DB_PASSWORD` to match your local MySQL root password before starting the server.
 
 ### 2. Install & Start the Backend Server (Port 3000)
 
 ```bash
-cd backend
+cd sec2_gr12_ws_src
 npm install
 npm start
 ```
@@ -97,7 +93,7 @@ The backend server will **automatically**:
 Open a **new terminal** and run:
 
 ```bash
-cd frontend
+cd sec2_gr12_fe_src
 npm install
 npm start
 ```
@@ -249,6 +245,6 @@ The database consists of **10 tables**:
 
 - The frontend and backend run on **separate servers** (ports 5500 and 3000 respectively).
 - CORS is enabled on the backend to allow cross-origin requests from the frontend.
-- All seed data (19 games, genres, admins, reviews, users) is defined in `schema.sql` as SQL INSERT statements.
+- All seed data (19 games, genres, admins, reviews, users) is defined in `sec2_gr12_database.sql` as SQL INSERT statements.
 - No Docker required — uses local MySQL server directly.
 - Clean URL routing is handled by Express Router on the frontend server.

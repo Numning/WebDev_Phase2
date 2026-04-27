@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GameHub —Sign in or create an account">
+    <title>Sign In —GameHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header with Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <a href="/home" class="logo">
+                <span class="logo-icon"><i class="icon-gamepad"></i></span>
+                <span>GAME</span>HUB
+            </a>
+            <div class="nav-links">
+                <a href="/home">Home</a>
+                <a href="/games">Games</a>
+                <a href="/team">Team</a>
+            </div>
+            <div class="nav-search">
+                <span class="search-icon"><i class="icon-search"></i></span>
+                <input type="text" placeholder="Search games..." id="nav-search-input">
+            </div>
+            <div class="nav-actions">
+                <a href="/wishlist" class="nav-icon-btn" title="Wishlist"><i class="icon-heart"></i></a>
+                <a href="/cart" class="nav-icon-btn" title="Cart"><i class="icon-cart"></i> <span class="cart-badge" id="cart-badge"></span></a>
+                <a href="/account" class="nav-icon-btn nav-icon-active" title="Account" id="nav-user-btn"><i class="icon-user"></i></a>
+                <a href="/admin/login" class="nav-admin-btn"><i class="icon-settings"></i> Admin</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="auth-container">
+            <div class="auth-card">
+                <!-- Tab Headers -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Sign In</button>
+                    <button class="auth-tab" data-tab="register">Create Account</button>
+                </div>
+
+                <!-- Login Form -->
+                <div class="auth-tab-content active" id="tab-login">
+                    <div class="error-message" id="login-error"></div>
+                    <form id="user-login-form">
+                        <div class="form-group">
+                            <label for="login-username">Username</label>
+                            <input type="text" id="login-username" class="form-control" placeholder="Enter your username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;" id="login-btn">Sign In</button>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div class="auth-tab-content" id="tab-register">
+                    <div class="error-message" id="register-error"></div>
+                    <div class="success-message" id="register-success"></div>
+                    <form id="user-register-form">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="reg-firstname">First Name</label>
+                                <input type="text" id="reg-firstname" class="form-control" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-lastname">Last Name</label>
+                                <input type="text" id="reg-lastname" class="form-control" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-username">Username</label>
+                            <input type="text" id="reg-username" class="form-control" placeholder="Choose a username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-email">Email</label>
+                            <input type="email" id="reg-email" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">Password</label>
+                            <input type="password" id="reg-password" class="form-control" placeholder="Min. 6 characters" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;" id="register-btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">GAMEHUB</div>
+                <p>Your ultimate destination for the best games at the best prices.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="/home">Home</a>
+                <a href="/games">Games</a>
+                <a href="/team">Team</a>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 GameHub. All rights reserved.</div>
+    </footer>
+
+    <script src="js/user-login.js"></script>
+</body>
+
+</html>

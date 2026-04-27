@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="GameHub —Discover, explore, and purchase the best games. New arrivals, trending, and games on sale.">
+    <title>GameHub —Home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header with Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <a href="/home" class="logo">
+                <span class="logo-icon"><i class="icon-gamepad"></i></span>
+                <span>GAME</span>HUB
+            </a>
+            <div class="nav-links">
+                <a href="/home" class="active">Home</a>
+                <a href="/games">Games</a>
+                <a href="/team">Team</a>
+            </div>
+            <div class="nav-search">
+                <span class="search-icon"><i class="icon-search"></i></span>
+                <input type="text" placeholder="Search games..." id="nav-search-input">
+            </div>
+            <div class="nav-actions">
+                <a href="/wishlist" class="nav-icon-btn" title="Wishlist"><i class="icon-heart"></i></a>
+                <a href="/cart" class="nav-icon-btn" title="Cart"><i class="icon-cart"></i> <span class="cart-badge" id="cart-badge" style="display:none;"></span></a>
+                <a href="/account" class="nav-icon-btn" title="Account" id="nav-user-btn"><i class="icon-user"></i></a>
+                <a href="/admin/login" class="nav-admin-btn"><i class="icon-settings"></i> Admin</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 2-Column Home Layout -->
+    <div class="home-layout">
+
+        <!-- Left Sidebar (Genre Navigation) -->
+        <aside class="left-sidebar">
+            <div class="sidebar-section-title" style="margin-top:0;">Browse by Genre</div>
+            <div class="genre-list">
+                <a href="/games?genre=Action">Action</a>
+                <a href="/games?genre=RPG">RPG</a>
+                <a href="/games?genre=Strategy">Strategy</a>
+                <a href="/games?genre=Simulation">Simulation</a>
+                <a href="/games?genre=Adventure">Adventure</a>
+                <a href="/games?genre=Racing">Racing</a>
+                <a href="/games?genre=Puzzle">Puzzle</a>
+                <a href="/games?genre=Sci-Fi">Sci-Fi</a>
+                <a href="/games?genre=Fighting">Fighting</a>
+                <a href="/games?genre=Survival">Survival</a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- Section 1: Featured Game Banner -->
+            <section id="featured-section">
+                <div class="featured-banner" id="featured-banner">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Games on Sale (Carousel) -->
+            <section class="carousel-section" id="sale-section">
+                <div class="carousel-header">
+                    <h2>Games on Sale ›</h2>
+                    <div class="carousel-arrows">
+                        <button class="carousel-arrow" id="sale-prev">‹</button>
+                        <button class="carousel-arrow" id="sale-next">›</button>
+                    </div>
+                </div>
+                <div class="carousel-track" id="sale-track">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: New Releases (Horizontal Slider) -->
+            <section class="carousel-section" id="new-releases-section">
+                <div class="carousel-header">
+                    <h2>New Releases ›</h2>
+                    <div class="carousel-arrows">
+                        <button class="carousel-arrow" id="new-prev">‹</button>
+                        <button class="carousel-arrow" id="new-next">›</button>
+                    </div>
+                </div>
+                <div class="carousel-track" id="new-track">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Free Games (Slider) -->
+            <section class="carousel-section" id="free-games-section">
+                <div class="carousel-header">
+                    <h2>Free Games ›</h2>
+                    <div class="carousel-arrows">
+                        <button class="carousel-arrow" id="free-prev">‹</button>
+                        <button class="carousel-arrow" id="free-next">›</button>
+                    </div>
+                </div>
+                <div class="carousel-track" id="free-track">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Most Popular (Horizontal Slider) -->
+            <section class="carousel-section" id="popular-section-container">
+                <div class="carousel-header">
+                    <h2>Most Popular ›</h2>
+                    <div class="carousel-arrows">
+                        <button class="carousel-arrow" id="popular-prev">‹</button>
+                        <button class="carousel-arrow" id="popular-next">›</button>
+                    </div>
+                </div>
+                <div class="popular-slider" id="popular-grid">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: New Game Releases (FreeToGame API Integration) -->
+            <section class="news-section" id="gaming-news-section" style="display:none;">
+                <div class="news-section-header">
+                    <div class="news-title-group">
+                        <span class="news-icon"><i class="icon-gamepad"></i></span>
+                        <h2>New Game Releases</h2>
+                        <span class="news-badge">FREE</span>
+                    </div>
+                    <p class="news-subtitle">Latest free-to-play games —powered by FreeToGame API</p>
+                </div>
+                <div class="news-grid" id="news-grid">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">GAMEHUB</div>
+                <p>Your ultimate destination for the best games at the best prices.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="/home">Home</a>
+                <a href="/games">Games</a>
+                <a href="/team">Team</a>
+                <a href="/admin/login">Admin</a>
+            </div>
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <div class="footer-social">
+                    <a href="#" title="Facebook">FB</a>
+                    <a href="#" title="Twitter">TW</a>
+                    <a href="#" title="Instagram">IG</a>
+                    <a href="#" title="Discord">DC</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 GameHub. All rights reserved.</div>
+    </footer>
+
+    <script src="js/home.js"></script>
+</body>
+
+</html>
