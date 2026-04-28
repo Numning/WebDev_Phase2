@@ -1,11 +1,11 @@
-﻿/**
+/**
  * cart.js —Shopping Cart Logic
  * 
  * Fetches cart items, displays order summary, allows removing items,
  * and handles updating quantities.
  */
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'https://gamehub.bexcon.tech/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Generate session ID if missing

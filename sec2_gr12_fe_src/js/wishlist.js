@@ -1,10 +1,10 @@
-﻿/**
+/**
  * wishlist.js —Wishlist Logic
  * 
  * Fetches and displays wishlisted games. Allows moving items to cart.
  */
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'https://gamehub.bexcon.tech/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('sessionId')) {

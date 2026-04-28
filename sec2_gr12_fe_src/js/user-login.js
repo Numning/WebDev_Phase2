@@ -1,4 +1,4 @@
-﻿/**
+/**
  * user-login.js —User Registration & Login Logic
  * 
  * Handles switching between Sign In and Create Account tabs.
@@ -6,7 +6,7 @@
  * Stores user session locally.
  */
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'https://gamehub.bexcon.tech/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Redirect if already logged in

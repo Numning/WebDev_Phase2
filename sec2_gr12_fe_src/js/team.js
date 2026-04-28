@@ -11,7 +11,7 @@
  */
 
 // Base URL for the backend API server (runs on separate port)
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'https://gamehub.bexcon.tech/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     setupNavSearch();
