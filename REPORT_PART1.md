@@ -158,7 +158,7 @@ Figure 1. Navigation Diagram of the GameHub Web Application
 
 ## 3.1 Front-end Overview
 
-The front-end was implemented using HTML5, CSS3, and vanilla JavaScript. It is hosted on a separate Express server (port 5500) with clean URL routing. All pages include a navigation bar and footer, use semantic HTML elements, and connect to the back-end API at `http://localhost:3000/api`. Navigation icons use a **CSS mask-image SVG icon system** — no emoji, no external icon libraries are required. The front-end source is located in the `sec2_gr12_fe_src/` directory and consists of 9 HTML pages, 1 CSS file (`css/style.css`), 9 JavaScript files in the `js/` directory, and a local `images/` folder containing game covers, gallery screenshots, and team profile photos.
+The front-end was implemented using HTML5, CSS3, and vanilla JavaScript. It is hosted on a separate Express server (port 5500) with clean URL routing. All pages include a navigation bar and footer, use semantic HTML elements, and connect to the back-end API at `https://gamehub.bexcon.tech/api` (production) or `http://localhost:3000/api` (local development). Navigation icons use a **CSS mask-image SVG icon system** — no emoji, no external icon libraries are required. The front-end source is located in the `sec2_gr12_fe_src/` directory and consists of 9 HTML pages, 1 CSS file (`css/style.css`), 9 JavaScript files in the `js/` directory, and a local `images/` folder containing game covers, gallery screenshots, and team profile photos.
 
 ## 3.2 Home Page
 

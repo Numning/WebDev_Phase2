@@ -139,7 +139,7 @@ The frontend server serves all HTML/CSS/JS files on port **5500** with clean URL
 
 Visit **http://localhost:5500** to access the application.
 
-> **Important:** Both servers must be running simultaneously. The frontend makes all API calls to the backend at `http://localhost:3000/api/`.
+> **Important:** Both servers must be running simultaneously. In **production**, the frontend makes all API calls to `https://gamehub.bexcon.tech/api`. For **local development**, update `API_BASE` in each JS file back to `http://localhost:3000/api`.
 
 ---
 
@@ -221,9 +221,10 @@ If your machine already has an older version of the `game_store` database and th
 
 ---
 
-## API Endpoints (Backend — Port 3000)
+## API Endpoints (Backend)
 
-Base URL: `http://localhost:3000/api`
+**Production Base URL:** `https://gamehub.bexcon.tech/api`  
+**Local Development Base URL:** `http://localhost:3000/api`
 
 ### Customer Authentication
 
@@ -347,7 +348,7 @@ The database (`game_store`) consists of **10 tables**:
 
 ## Remarks
 
-- The frontend and backend run on **separate servers** — ports **5500** and **3000** respectively.
+- The frontend and backend run on **separate servers** — the frontend on port **5500** and the backend on port **3000** (locally) or at `https://gamehub.bexcon.tech/api` (production).
 - CORS is enabled on the backend to allow cross-origin requests from the frontend server.
 - All seed data (24 games, 28 genres, 10 admins, 41+ reviews, 10 users, 10 cart records, 10 wishlist entries) is defined in `sec2_gr12_database.sql` and imported automatically on the first run.
 - Game images are **hosted locally** under `sec2_gr12_fe_src/images/games/<GameFolder>/` — `front.jpg` is the card cover image; `detail_N.jpg` files form the gallery slider on the detail page.

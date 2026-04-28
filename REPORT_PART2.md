@@ -395,7 +395,7 @@ The web services were tested using **Postman**. Test case specifications are als
 
 ## 6.1 Front-end and Back-end on Different Servers
 - Front-end server runs on: `http://localhost:5500` (Node.js Express static server)
-- Back-end server runs on: `http://localhost:3000` (Node.js Express API server)
+- Back-end server runs on: `http://localhost:3000` (local) / `https://gamehub.bexcon.tech` (production)
 - CORS middleware is enabled in the backend `server.js` to allow cross-origin requests from the frontend.
 
 ## 6.2 Database Connection
@@ -434,7 +434,7 @@ The repository includes a comprehensive `README.md` with project structure, team
 3. Install dependencies: `npm install`
 4. Start the server: `npm start`
 5. The server automatically creates the database and all tables on first run
-6. Verify at `http://localhost:3000`
+6. Verify at `http://localhost:3000` (or `https://gamehub.bexcon.tech` in production)
 
 ## 7.2 Steps to Run the Front-end
 1. Open a **new terminal**

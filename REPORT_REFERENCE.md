@@ -194,7 +194,8 @@ The backend is a **Node.js + Express** RESTful API server.
 ### 5.1 Web Service Architecture
 
 All web services follow **RESTful conventions**:
-- **Base URL:** `http://localhost:3000/api`
+- **Production Base URL:** `https://gamehub.bexcon.tech/api`
+- **Local Development Base URL:** `http://localhost:3000/api`
 - **Format:** JSON request/response
 - **Methods:** GET, POST, PUT, DELETE
 - **Error handling:** Consistent JSON error responses with HTTP status codes
