@@ -46,7 +46,7 @@ Include the following information on the cover page:
 | Frontend   | HTML5, CSS3, Vanilla JavaScript |
 | Backend    | Node.js, Express.js             |
 | Database   | MySQL                           |
-| Auth       | bcryptjs (password hashing)     |
+| Auth       | Plain text password comparison  |
 | Public API | FreeToGame API (no key needed)  |
 
 ---
@@ -165,7 +165,7 @@ The backend is a **Node.js + Express** RESTful API server.
 | File           | Endpoints | Key Operations                      |
 | -------------- | --------- | ----------------------------------- |
 | `games.js`     | 6         | CRUD + search with filters + genres |
-| `auth.js`      | 1         | Admin login with bcrypt             |
+| `auth.js`      | 1         | Admin login with direct password comparison |
 | `reviews.js`   | 4         | Get, post, stats, delete reviews    |
 | `cart.js`      | 6         | Get, add, update, remove, clear, count |
 | `wishlist.js`  | 4         | Get, add, remove, check             |
@@ -177,14 +177,14 @@ The backend is a **Node.js + Express** RESTful API server.
 | Table         | Columns | Description                           |
 | ------------- | ------- | ------------------------------------- |
 | Administrator | 5       | Admin user profile information        |
-| AdminLogin    | 5       | Credentials (bcrypt hash), login log  |
+| AdminLogin    | 5       | Credentials (plain text), login log   |
 | Game          | 9       | Game info, pricing, images            |
 | Genre         | 2       | Genre categories                      |
 | GameGenre     | 2       | Many-to-many game↔genre mapping       |
 | Review        | 5       | User reviews with 1–5 star rating     |
 | Wishlist      | 4       | Session-based game wishlist           |
 | AdminAddGame  | 3       | Tracks which admin added which game   |
-| User          | 7       | Customer accounts (bcrypt passwords)  |
+| User          | 7       | Customer accounts (plain text passwords) |
 | Cart          | 5       | Session-based shopping cart items     |
 
 ---
@@ -226,15 +226,15 @@ All web services follow **RESTful conventions**:
 ### 5.3 Authentication Web Services
 
 #### Admin Login — POST `/api/auth/login`
-- Validates username/password against bcrypt-hashed credentials.
+- Validates username/password against stored plain text credentials.
 - Updates `LastLoginLog` timestamp on success.
 
 #### User Register — POST `/api/users/register`
-- Hashes password with bcrypt (10 salt rounds).
+- Stores password as plain text.
 - Checks for duplicate username/email (409 Conflict).
 
 #### User Login — POST `/api/users/login`
-- Compares password against stored bcrypt hash.
+- Compares password directly against stored plain text value.
 - Returns user profile on success.
 
 ### 5.4 Review Web Services (`routes/reviews.js`)

@@ -39,7 +39,7 @@
  * method: POST
  * URL: http://localhost:3000/api/games
  * body: raw JSON
- * {
+//  * {
  *   "title": "Test Game",
  *   "genres": ["Action", "RPG"],
  *   "price": 999,

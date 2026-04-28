@@ -263,7 +263,7 @@ sec2_gr12_ws_src/
 ├── config/
 │   └── db.js               # MySQL connection pool + database initialization
 ├── sec2_gr12_database.sql  # 10 tables + seed data (24 games, genres, admins, reviews)
-├── package.json            # Dependencies: express, mysql2, cors, dotenv, bcryptjs
+├── package.json            # Dependencies: express, mysql2, cors, dotenv
 ├── .env                    # Environment variables (edit with your MySQL credentials)
 └── routes/
     ├── games.js            # GET/POST/PUT/DELETE /api/games (CRUD + search)
@@ -455,7 +455,7 @@ The repository includes a comprehensive `README.md` with project structure, team
 
 This project successfully implemented a full-stack web application for the gaming e-commerce domain using HTML5, CSS3, JavaScript, Node.js with Express.js, and MySQL. The GameHub platform enables users to browse, search, and explore a catalog of games with rich detail pages featuring **locally hosted images**, manage shopping carts (1 copy per game per session) and wishlists, submit reviews, and create customer accounts.
 
-The system includes 9 front-end pages with consistent navigation, a **CSS mask-image SVG icon system**, and a dark-themed responsive design. Key features include: administrator authentication with bcrypt password hashing, multi-criteria game search, detailed game viewing with a **local image gallery slider** and tabbed content, full CRUD game management, a review system with ratings and star-distribution bar charts, session-based cart with 1-per-game enforcement, wishlist management, customer registration and login, real team profile photos, and integration with the FreeToGame public API.
+The system includes 9 front-end pages with consistent navigation, a **CSS mask-image SVG icon system**, and a dark-themed responsive design. Key features include: administrator authentication with plain text password comparison, multi-criteria game search, detailed game viewing with a **local image gallery slider** and tabbed content, full CRUD game management, a review system with ratings and star-distribution bar charts, session-based cart with 1-per-game enforcement, wishlist management, customer registration and login, real team profile photos, and integration with the FreeToGame public API.
 
 The back-end provides 25 RESTful API endpoints across seven route modules (games, auth, reviews, cart, wishlist, users, news), connected to a MySQL database with **10 relational tables** each containing 10 or more seed records: 24 games, 28 genres, 10 administrators, 10 admin logins, 10 users, 41 reviews, 10 wishlist entries, 10 cart entries, and 72 genre mappings. All web services are documented with inline Postman test cases in the source code.
 
@@ -468,7 +468,7 @@ Through this project, the team gained practical experience in full-stack web dev
 
 ## Appendix A: Database Tables / Sample Records
 - **Administrator** — 10 admin accounts (Super Admin + Managers + Moderators)
-- **AdminLogin** — 10 login credentials (bcrypt hashed, roles: super_admin / manager / moderator / content_manager)
+- **AdminLogin** — 15 login credentials (plain text passwords, roles: Super Admin / Manager / Moderator / Content Manager)
 - **Game** — **24 game products** with full details and locally hosted images (`/images/games/<folder>/front.jpg`)
 - **Genre** — 28 genre categories (Action, RPG, Strategy, Simulation, Fantasy, etc.)
 - **GameGenre** — 72 many-to-many mappings
@@ -490,7 +490,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 ```
 
 ## Appendix C: Key Code Snippets Reference
-1. Admin Login Route (`sec2_gr12_ws_src/routes/auth.js`) — Login with bcrypt comparison
+1. Admin Login Route (`sec2_gr12_ws_src/routes/auth.js`) — Login with direct password comparison
 2. Game Search Route (`sec2_gr12_ws_src/routes/games.js`) — Multi-criteria search with dynamic SQL
 3. Game CRUD Routes (`sec2_gr12_ws_src/routes/games.js`) — Insert, Update, Delete with genre sync
 4. FreeToGame Proxy (`sec2_gr12_ws_src/routes/news.js`) — Public API integration
@@ -506,7 +506,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 - FreeToGame API Documentation. Accessed April 2026. https://www.freetogame.com/api-doc
 - Express.js Documentation. Accessed April 2026. https://expressjs.com
 - MySQL2 Documentation. Accessed April 2026. https://github.com/sidorares/node-mysql2
-- bcryptjs Documentation. Accessed April 2026. https://github.com/dcodeIO/bcrypt.js
 
 
 ---

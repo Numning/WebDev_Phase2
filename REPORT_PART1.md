@@ -71,7 +71,7 @@ The system supports two main user groups:
 - Access team member information with real profile photos and social links.
 
 ### Administrators
-- Log in using a dedicated administrator login page secured with bcrypt password hashing.
+- Log in using a dedicated administrator login page secured with direct password comparison.
 - Add new games via a modal form with genre checkboxes, pricing type selection, and gallery image URLs.
 - Update existing games inline from the inventory data table.
 - Delete games with a confirmation dialog; associated data is removed via CASCADE foreign keys.
